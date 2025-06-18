@@ -32,7 +32,7 @@
   // Load logo image and tint it green
   let logoImg;
   const logo = new Image();
-  logo.src = '/logofilledwhite.svg';
+  logo.src = `${import.meta.env.BASE_URL}logofilledwhite.svg`;
   logo.onload = () => {
     // Create tinted version once
     const off = document.createElement('canvas');

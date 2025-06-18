@@ -219,6 +219,34 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     cursorPosition = null;
   });
 
+  // Track touch movement for mobile
+  document.addEventListener('touchmove', (e) => {
+    e.preventDefault(); // Prevent scrolling while touching
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      const newPosition = posToGridIndex(touch.clientX, touch.clientY);
+      
+      // Only update cursor position if it's actually changed to a different cell
+      if (newPosition !== cursorPosition) {
+        cursorPosition = newPosition;
+      }
+    }
+  }, { passive: false });
+  
+  // Clear cursor position when touch ends
+  document.addEventListener('touchend', () => {
+    cursorPosition = null;
+  });
+  
+  // Start tracking when touch begins
+  document.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      const newPosition = posToGridIndex(touch.clientX, touch.clientY);
+      cursorPosition = newPosition;
+    }
+  });
+
   resize();
   window.addEventListener('resize', resize);
   requestAnimationFrame(loop);

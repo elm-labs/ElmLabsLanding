@@ -33,12 +33,12 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 		<PixelGrid />
 
 	<!-- Logo -->
-	<div class="fixed top-24 left-24 z-10">
+	<div class="fixed top-6 left-6 md:top-24 md:left-24 z-10">
 		<img src={`${base}elmlogowhite.svg`} alt="Elm Labs Logo" width="80" height="80" />
 	</div>
 
 	<!-- Main text content -->
-	<div class="flex flex-col items-start min-h-screen justify-center relative z-10 pl-24">
+	<div class="flex flex-col items-start min-h-screen justify-center relative z-10 pl-6 md:pl-24">
 		<h1 class="text-9xl md:text-[12rem] font-bold text-[#ffe0b8] leading-[0.85] tracking-[-0.05em]">
 			Elm Labs
 		</h1>
@@ -48,7 +48,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 	</div>
 
 	<!-- Email link -->
-	<div class="fixed bottom-24 left-24 z-10">
+	<div class="fixed bottom-6 left-6 md:bottom-24 md:left-24 z-10">
 		<a href="mailto:founders@elmlabs.ai" class="text-white/70 hover:text-white transition-colors duration-200 text-sm tracking-wide font-['Inter',sans-serif]">
 			founders@elmlabs.ai
 		</a>
@@ -70,7 +70,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 			/* Custom responsive typography */
 			@media (max-width: 768px) {
 				h1 {
-					font-size: 4rem;
+					font-size: 6rem;
 					line-height: 1.1;
 				}
 				p {

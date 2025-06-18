@@ -2,6 +2,9 @@
 import '../styles/global.css';
 import DynamicGradient from '../components/DynamicGradient.astro';
 import PixelGrid from '../components/PixelGrid.astro';
+
+// Get the base URL for assets
+const base = import.meta.env.BASE_URL;
 ---
 
 <html lang="en">
@@ -31,7 +34,7 @@ import PixelGrid from '../components/PixelGrid.astro';
 
 	<!-- Logo -->
 	<div class="fixed top-24 left-24 z-10">
-		<img src={`${import.meta.env.BASE_URL}elmlogowhite.svg`} alt="Elm Labs Logo" width="80" height="80" />
+		<img src={`${base}elmlogowhite.svg`} alt="Elm Labs Logo" width="80" height="80" />
 	</div>
 
 	<!-- Main text content -->

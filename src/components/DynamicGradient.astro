@@ -1,0 +1,81 @@
+---
+---
+<!-- Dynamic background gradient that reacts to cursor movement with a light physics-based spring effect -->
+<div class="gradient-container fixed inset-0 -z-10">
+  <!-- TEMPORARY DEBUG: Gradient center indicators -->
+  <!-- <div class="debug-dot-1"></div> -->
+</div>
+
+<style>
+  .gradient-container {
+    pointer-events: none; /* Clicks pass through */
+    /* Base linear gradient for overall colour theme with two interactive radial gradients */
+        background: 
+      /* First gradient - bottom right focused */
+      radial-gradient(circle at var(--x, 80%) var(--y, 80%), 
+       #1d3f28 0%,
+         #142b1c 80%);
+    transition: background 0.15s linear; /* Smooth transition between frames */
+  }
+
+  /* TEMPORARY DEBUG: Gradient center indicators */
+  .debug-dot-1 {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 0, 0, 0.8);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    left: var(--x);
+    top: var(--y);
+  }
+  
+
+</style>
+
+<script is:inline>
+  /**
+   * A lightweight spring-based animation keeping the gradient centre
+   * in sync with cursor position while applying natural easing.
+   */
+  const el = document.querySelector('.gradient-container');
+  if (el) {
+    // First gradient (green, bottom right)
+    let x = window.innerWidth * 0.8;
+    let y = window.innerHeight * 0.8;
+    let vx = 0, vy = 0;
+    const stiffness = 0.01; // spring strength
+    const damping = 0.8;    // velocity damping
+    let targetX = x, targetY = y;
+
+    window.addEventListener('mousemove', (e) => {
+      // First gradient - half displacement from bottom right
+      const centerX = window.innerWidth * 0.8;
+      const centerY = window.innerHeight * 0.8;
+      targetX = centerX + (e.clientX - centerX) * 0.5;
+      targetY = centerY + (e.clientY - centerY) * 0.5;
+    });
+
+    const update = () => {
+      // Update first gradient
+      const ax = (targetX - x) * stiffness;
+      const ay = (targetY - y) * stiffness;
+      vx = (vx + ax) * damping;
+      vy = (vy + ay) * damping;
+      x += vx;
+      y += vy;
+
+      // Calculate position percentages
+      const xp = (x / window.innerWidth) * 100;
+      const yp = (y / window.innerHeight) * 100;
+
+      el.style.setProperty('--x', `${xp}%`);
+      el.style.setProperty('--y', `${yp}%`);
+
+      requestAnimationFrame(update);
+    };
+
+    update();
+  }
+</script>

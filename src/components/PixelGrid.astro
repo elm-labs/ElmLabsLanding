@@ -1,0 +1,222 @@
+---
+---
+<canvas class="pixel-grid"></canvas>
+
+<style>
+  .pixel-grid {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -5; /* Above gradient (-10) but below main content (0) */
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script is:inline>
+  /* Logo-based shimmering grid */
+  const canvas = document.querySelector('.pixel-grid');
+  const ctx = canvas.getContext('2d');
+
+  const CELL = 32;           // 16px logo + 16px gap
+  const DECAY = 0.9;         // fade factor per frame  
+  const TRACE_LENGTH = 25;   // Number of pixels in a trace
+  const DPR = 1;             // render at 1× for performance
+
+  let width, height, cols, rows, total;
+  const active = new Map(); // Map<index, alpha>
+  let cursorPosition = null;
+  let lastTriggeredPosition = null;
+  const activeTraces = new Map(); // Map<startIndex, {pixels: number[], complete: boolean}>
+  
+  // Load logo image and tint it green
+  let logoImg;
+  const logo = new Image();
+  logo.src = '/logofilledwhite.svg';
+  logo.onload = () => {
+    // Create tinted version once
+    const off = document.createElement('canvas');
+    const SIZE = 16;
+    off.width = SIZE;
+    off.height = SIZE;
+    const octx = off.getContext('2d');
+    octx.drawImage(logo, 0, 0, SIZE, SIZE);
+    octx.globalCompositeOperation = 'source-atop';
+    octx.fillStyle = 'rgb(10, 37, 18)';
+    octx.fillRect(0, 0, SIZE, SIZE);
+    logoImg = off;
+    resize(); // Initial render once ready
+  };
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    cols = Math.ceil(width / CELL);
+    rows = Math.ceil(height / CELL);
+    total = cols * rows;
+
+    canvas.width = width * DPR;
+    canvas.height = height * DPR;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    active.clear();
+    cursorPosition = null;
+    lastTriggeredPosition = null;
+    activeTraces.clear();
+  }
+
+  // Convert mouse position to grid coordinates
+  function posToGridIndex(x, y) {
+    const col = Math.floor(x / CELL);
+    const row = Math.floor(y / CELL);
+    // Ensure within bounds
+    if (col >= 0 && col < cols && row >= 0 && row < rows) {
+      return row * cols + col;
+    }
+    return null;
+  }
+
+  // Generate the next step in a random walk
+  function getNextInTrace(currentIdx) {
+    const currentCol = currentIdx % cols;
+    const currentRow = Math.floor(currentIdx / cols);
+    
+    // Possible directions: up, right, down, left
+    const directions = [];
+    
+    // Check all four directions and add valid ones
+    if (currentRow > 0) directions.push(-cols); // up
+    if (currentCol < cols - 1) directions.push(1); // right
+    if (currentRow < rows - 1) directions.push(cols); // down
+    if (currentCol > 0) directions.push(-1); // left
+    
+    // If no valid directions (shouldn't happen normally), return null
+    if (directions.length === 0) return null;
+    
+    // Pick a random direction
+    const randomDir = directions[Math.floor(Math.random() * directions.length)];
+    return currentIdx + randomDir;
+  }
+
+  // Start a new trace from the cursor position
+  function startTrace(startIdx) {
+    if (startIdx === null) return;
+    
+    // Initialize new trace
+    activeTraces.set(startIdx, {
+      pixels: [startIdx],
+      complete: false
+    });
+    const rotationDirection = Math.random() < 0.5 ? 1 : -1;
+    active.set(startIdx, { alpha: 1, rotationDirection });
+    
+    // Create the trace
+    createNextTraceStep(startIdx);
+  }
+  
+  // Recursively create the trace one step at a time
+  function createNextTraceStep(startIdx) {
+    const trace = activeTraces.get(startIdx);
+    if (!trace || trace.complete) return;
+    
+    if (trace.pixels.length >= TRACE_LENGTH) {
+      trace.complete = true;
+      return;
+    }
+    
+    const lastIdx = trace.pixels[trace.pixels.length - 1];
+    const nextIdx = getNextInTrace(lastIdx);
+    
+    if (nextIdx !== null) {
+      trace.pixels.push(nextIdx);
+      const rotationDirection = Math.random() < 0.5 ? 1 : -1;
+      active.set(nextIdx, { alpha: 1, rotationDirection });
+      
+      // Add the next step after a small delay
+      setTimeout(() => createNextTraceStep(startIdx), 30);
+    } else {
+      trace.complete = true;
+    }
+  }
+
+  function update() {
+    // Update existing active cells (fade out)
+    for (const [idx, pixelState] of active) {
+      const newAlpha = pixelState.alpha * DECAY;
+      if (newAlpha < 0.02) {
+        active.delete(idx);
+      } else {
+        pixelState.alpha = newAlpha;
+      }
+    }
+    
+    // Clean up completed traces
+    for (const [startIdx, trace] of activeTraces) {
+      if (trace.complete && trace.pixels.every(pixel => !active.has(pixel))) {
+        activeTraces.delete(startIdx);
+      }
+    }
+    
+    // Start a new trace if cursor is over a different pixel than last triggered
+    if (cursorPosition !== null && cursorPosition !== lastTriggeredPosition) {
+      lastTriggeredPosition = cursorPosition;
+      startTrace(cursorPosition);
+    }
+  }
+
+  function render() {
+    if (!logoImg) return;
+    
+    ctx.clearRect(0, 0, width, height);
+    for (const [idx, pixelState] of active) {
+      const { alpha, rotationDirection } = pixelState;
+      ctx.globalAlpha = alpha * 0.6;
+      const c = idx % cols;
+      const r = Math.floor(idx / cols);
+      const x = c * CELL + 8;
+      const y = r * CELL + 8;
+      const centerX = x + 8;
+      const centerY = y + 8;
+
+      const rotation = (1 - alpha) * (Math.PI / 2) * rotationDirection;
+
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.rotate(rotation);
+      ctx.drawImage(logoImg, -8, -8, 16, 16);
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  let last = 0;
+  function loop(t) {
+    if (t - last > 33) { // ~30 FPS
+      update();
+      render();
+      last = t;
+    }
+    requestAnimationFrame(loop);
+  }
+
+  // Track mouse position
+  document.addEventListener('mousemove', (e) => {
+    const newPosition = posToGridIndex(e.clientX, e.clientY);
+    
+    // Only update cursor position if it's actually changed to a different cell
+    if (newPosition !== cursorPosition) {
+      cursorPosition = newPosition;
+    }
+  });
+  
+  // Clear cursor position when mouse leaves
+  document.addEventListener('mouseout', () => {
+    cursorPosition = null;
+  });
+
+  resize();
+  window.addEventListener('resize', resize);
+  requestAnimationFrame(loop);
+</script>

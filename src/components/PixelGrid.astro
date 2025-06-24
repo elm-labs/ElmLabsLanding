@@ -45,7 +45,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     const octx = off.getContext('2d');
     octx.drawImage(logo, 0, 0, SIZE, SIZE);
     octx.globalCompositeOperation = 'source-atop';
-    octx.fillStyle = 'rgb(10, 37, 18)';
+    octx.fillStyle = '#0a2410';
     octx.fillRect(0, 0, SIZE, SIZE);
     logoImg = off;
     resize(); // Initial render once ready
@@ -175,7 +175,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     ctx.clearRect(0, 0, width, height);
     for (const [idx, pixelState] of active) {
       const { alpha, rotationDirection } = pixelState;
-      ctx.globalAlpha = alpha * 0.6;
+      ctx.globalAlpha = alpha * 0.8;
       const c = idx % cols;
       const r = Math.floor(idx / cols);
       const x = c * CELL + 8;

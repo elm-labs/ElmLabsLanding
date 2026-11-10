@@ -1,0 +1,362 @@
+---
+// Variant B — "Control room". Leads with reliability after launch. Dark, technical, live panels.
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const mail = 'mailto:jawwad@elmlabs.ai?subject=20%20minutes';
+---
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+	<title>Elm Labs — Keep AI working once it's live</title>
+	<meta name="description" content="Elm Labs puts one critical AI workflow into production and builds the evaluations that tell you every day whether it still works." />
+	<meta name="theme-color" content="#06100B" />
+	<meta name="color-scheme" content="dark" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+	<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body style={`--logo:url(${base}logofilledwhite.svg)`}>
+	<div class="gridbg" aria-hidden="true"></div>
+	<header class="nav">
+		<a class="brand" href="#top"><span class="leaf"></span>Elm Labs</a>
+		<nav class="mono">
+			<a href="#fail">Failure modes</a>
+			<a href="#loop">Method</a>
+			<a href="#switch">Switching</a>
+			<a href="#start">Start</a>
+		</nav>
+		<a class="btn sm" href={mail}>Book 20 minutes</a>
+	</header>
+
+	<main id="top">
+		<section class="hero">
+			<div class="hero-l">
+				<p class="mono tagline rv"><i class="dot"></i>Production AI engineering</p>
+				<h1 class="rv">Keep AI working once it's <em>live.</em></h1>
+				<p class="lede rv">Models get updated. Data shifts. Processes change. We put one critical workflow into production with your team, and build the evaluations that tell you every day whether it still works.</p>
+				<div class="cta-row rv">
+					<a class="btn" href={mail}>Book 20 minutes <span>→</span></a>
+					<span class="mono dim">No deck</span>
+				</div>
+			</div>
+
+			<div class="mon rv" aria-label="Illustrative production monitor">
+				<div class="mon-bar mono"><span><i class="dot"></i>workflow-01 · production</span><span class="dim">illustrative</span></div>
+				<div class="traces">
+					<div class="tr"><div class="mono"><span>Quality</span><b id="vq">94.2%</b></div><canvas id="cq"></canvas></div>
+					<div class="tr"><div class="mono"><span>Drift</span><b id="vd">0.03</b></div><canvas id="cd"></canvas></div>
+					<div class="tr"><div class="mono"><span>Cost / 1k tasks</span><b id="vc">£41</b></div><canvas id="cc"></canvas></div>
+				</div>
+				<div class="log mono" id="log"></div>
+			</div>
+		</section>
+
+		<div class="ticker mono" aria-hidden="true">
+			<div>
+				<span>model version</span><span>prompt</span><span>data schema</span><span>policy</span><span>supplier</span><span>rate card</span><span>team</span><span>regulation</span><span>price per token</span><span>context window</span>
+				<span>model version</span><span>prompt</span><span>data schema</span><span>policy</span><span>supplier</span><span>rate card</span><span>team</span><span>regulation</span><span>price per token</span><span>context window</span>
+			</div>
+		</div>
+		<p class="ticker-cap mono">Everything above changes after launch. Each change can break the workflow without an error.</p>
+
+		<section class="sec" id="fail">
+			<p class="mono lab rv">[01] Failure modes</p>
+			<h2 class="rv">Production AI fails quietly.</h2>
+			<p class="sub rv">Pilots work. The stall comes later, when nobody can prove the system still does good work.</p>
+			<div class="cells">
+				<div class="cell rv"><p class="mono">Model update</p><h3>The vendor ships a new version.</h3><p>Same prompt, different answer. Uptime stays at 100%.</p><p class="mono sig">Signal without evals: <b>none</b></p></div>
+				<div class="cell rv"><p class="mono">Data shift</p><h3>A new source or format arrives.</h3><p>The workflow meets cases nobody tested. It answers anyway.</p><p class="mono sig">Signal without evals: <b>none</b></p></div>
+				<div class="cell rv"><p class="mono">Process change</p><h3>The policy moves.</h3><p>Yesterday's right answer is today's wrong one. The system doesn't know.</p><p class="mono sig">Signal without evals: <b>none</b></p></div>
+				<div class="cell rv"><p class="mono">Cost creep</p><h3>Usage grows. So does the bill.</h3><p>Token spend has no cap. Nobody can say what a task should cost.</p><p class="mono sig">Signal without evals: <b>the invoice</b></p></div>
+			</div>
+		</section>
+
+		<section class="sec" id="loop">
+			<p class="mono lab rv">[02] Method</p>
+			<h2 class="rv">Live. Proven. Owned.</h2>
+			<div class="pipe rv" aria-hidden="true"><i></i></div>
+			<div class="stages">
+				<div class="stage rv">
+					<p class="mono">Stage 1 · Live</p>
+					<h3>Get it live</h3>
+					<p>Our engineers embed in your team on one critical workflow. We build on the models you already use. Your users see no change on day one.</p>
+				</div>
+				<div class="stage rv">
+					<p class="mono">Stage 2 · Proven</p>
+					<h3>Prove it works</h3>
+					<p>We record how your experts decide: the context they used, what they corrected, the outcome. Those records become evaluations that run every day.</p>
+					<table class="mono">
+						<tr><td>Quality</td><td>vs your experts' decisions</td></tr>
+						<tr><td>Drift</td><td>change per task, per week</td></tr>
+						<tr><td>Cost</td><td>per task, per model</td></tr>
+					</table>
+				</div>
+				<div class="stage rv">
+					<p class="mono">Stage 3 · Owned <span class="opt">optional</span></p>
+					<h3>Own it, when you're ready</h3>
+					<p>The same evaluations train open-weight models that you host. Each task moves only when the owned model matches. You can move it back.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="sec" id="switch">
+			<p class="mono lab rv">[03] Switching</p>
+			<div class="sw-wrap">
+				<div>
+					<h2 class="rv">Switch only when they match.</h2>
+					<p class="sub rv">Your evaluations score the model you rent and the model you own on the same tasks. A task becomes switchable when the scores match. Try it.</p>
+					<p class="mono total rv">Cost / 1k tasks <b id="tot">£41.00</b> <span id="save"></span></p>
+				</div>
+				<div class="sw rv">
+					<div class="sw-head mono"><span>Task</span><span>Rented</span><span>Owned</span><span>Route</span></div>
+					<div id="rows"></div>
+					<p class="mono dim sw-foot">Illustrative scores. Flip a switch, then flip it back.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="sec" id="start">
+			<p class="mono lab rv">[04] Start</p>
+			<div class="grid3">
+				<div class="panel rv">
+					<p class="mono">Scope</p>
+					<h3>One workflow. About a month.</h3>
+					<p>You leave with numbers for quality, drift and cost on a workflow that matters to you. No production commitment.</p>
+				</div>
+				<div class="panel rv">
+					<p class="mono">Who it's for</p>
+					<h3>Reliability at scale</h3>
+					<p>Fintech, neobanks and gaming. AI already runs in customer-facing work. You want steady quality, lower cost and no single vendor.</p>
+					<h3 class="h3b">Proof and control</h3>
+					<p>Energy, utilities, industrials and construction. You have to show why the answer was right.</p>
+				</div>
+				<div class="panel rv">
+					<p class="mono">Team</p>
+					<h3>Jawwad Farid</h3>
+					<p>Palantir backend tech lead, Ontology infrastructure. Founding engineer at two AI startups.</p>
+					<h3 class="h3b">Burhan Ashraf</h3>
+					<p>Palantir forward-deployed tech lead. Led one of its largest UK government accounts.</p>
+					<p class="mono dim tm">10+ years at Palantir between them · Cambridge Engineering</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="close">
+			<p class="mono rv"><i class="dot"></i>Open channel</p>
+			<h2 class="rv">Book 20 minutes. No deck.</h2>
+			<a class="mail rv" href={mail}>jawwad@elmlabs.ai →</a>
+		</section>
+	</main>
+	<footer class="foot mono"><span><span class="leaf"></span>Elm Labs · UK</span><a href="https://www.linkedin.com/company/elm-labs-ai" target="_blank" rel="noopener noreferrer">LinkedIn</a><span>© 2026</span></footer>
+
+	<style is:global>
+		:root{--bg:#06100B;--panel:#0B1811;--line:#1B2E24;--text:#E6ECE3;--dim:#7F9186;--ok:#8FE3A0;--warn:#E3C76A;--pad:clamp(18px,3.4vw,56px)}
+		*{box-sizing:border-box;margin:0;padding:0}
+		html{scroll-behavior:smooth}
+		body{background:var(--bg);color:var(--text);font-family:'Geist',system-ui,sans-serif;font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+		a{color:inherit;text-decoration:none}
+		em{font-style:normal;color:var(--ok)}
+		.mono{font-family:'Geist Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+		.dim{color:var(--dim)}
+		.leaf{display:inline-block;width:.82em;height:1em;vertical-align:-.12em;margin-right:.45em;background:var(--ok);-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat}
+		.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:9px;box-shadow:0 0 10px var(--ok);animation:pulse 2s infinite}
+		@keyframes pulse{50%{opacity:.35}}
+		.rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+		.rv.in{opacity:1;transform:none}
+		.gridbg{position:fixed;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.35;-webkit-mask-image:radial-gradient(ellipse at 70% 0%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 70% 0%,#000 0%,transparent 70%)}
+
+		.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px var(--pad);background:rgba(6,16,11,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+		.brand{font-weight:500;font-size:17px;letter-spacing:-.01em}
+		.nav nav{display:flex;gap:28px}
+		.nav nav a:hover{color:var(--text)}
+		.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ok);color:#06100B;padding:14px 22px;border-radius:6px;font-weight:500;font-size:15.5px;transition:box-shadow .25s,transform .2s}
+		.btn:hover{box-shadow:0 0 0 4px rgba(143,227,160,.18),0 0 32px rgba(143,227,160,.35);transform:translateY(-1px)}
+		.btn.sm{padding:8px 14px;font-size:13.5px}
+
+		.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,4vw,72px);align-items:center;padding:clamp(48px,7vw,110px) var(--pad) clamp(48px,6vw,90px);min-height:min(88vh,900px)}
+		.tagline{margin-bottom:26px}
+		h1{font-size:clamp(2.8rem,6.3vw,6.4rem);font-weight:500;line-height:.98;letter-spacing:-.045em;margin-bottom:28px}
+		.lede{font-size:clamp(17px,1.35vw,20px);color:#B6C3BA;max-width:52ch;line-height:1.5}
+		.cta-row{display:flex;align-items:center;gap:18px;margin-top:34px}
+
+		.mon{background:linear-gradient(180deg,#0D1C14,#08130D);border:1px solid var(--line);border-radius:10px;box-shadow:0 40px 120px rgba(0,0,0,.55),0 0 0 1px rgba(143,227,160,.04) inset;overflow:hidden}
+		.mon-bar{display:flex;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--line);color:var(--text)}
+		.traces{display:grid}
+		.tr{display:grid;grid-template-columns:150px 1fr;align-items:center;border-bottom:1px solid var(--line);padding:0 0 0 18px}
+		.tr .mono{display:flex;flex-direction:column;gap:4px}
+		.tr b{font-size:21px;font-weight:500;letter-spacing:-.02em;color:var(--text);text-transform:none;transition:color .3s}
+		.tr b.bad{color:var(--warn)}
+		.tr canvas{width:100%;height:78px;display:block}
+		.log{height:188px;padding:14px 18px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;text-transform:none;letter-spacing:.01em;font-size:12.5px}
+		.log p{display:grid;grid-template-columns:48px 1fr auto;gap:12px;animation:lin .35s ease}
+		.log p span:nth-child(2){color:var(--text)}
+		.log p.w span:nth-child(2),.log p.w span:nth-child(3){color:var(--warn)}
+		.log p.g span:nth-child(3){color:var(--ok)}
+		@keyframes lin{from{opacity:0;transform:translateY(6px)}}
+
+		.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:15px 0;white-space:nowrap}
+		.ticker div{display:inline-block;animation:tick 38s linear infinite}
+		.ticker span{margin:0 26px}
+		.ticker span::before{content:'Δ ';color:var(--warn)}
+		@keyframes tick{to{transform:translateX(-50%)}}
+		.ticker-cap{padding:14px var(--pad);text-transform:none;letter-spacing:.01em;font-size:13px}
+
+		.sec{padding:clamp(70px,9vw,140px) var(--pad) 0}
+		.lab{color:var(--ok);margin-bottom:22px}
+		h2{font-size:clamp(2.1rem,4.4vw,4.4rem);font-weight:500;line-height:1.02;letter-spacing:-.04em;max-width:16ch;margin-bottom:18px}
+		.sub{color:#B6C3BA;font-size:clamp(17px,1.3vw,19.5px);max-width:54ch}
+		h3{font-size:clamp(1.15rem,1.5vw,1.4rem);font-weight:500;letter-spacing:-.02em;line-height:1.2;margin:14px 0 8px}
+		.cells{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(36px,4.5vw,64px);border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+		.cell{padding:26px 24px 22px;border-right:1px solid var(--line);display:flex;flex-direction:column;transition:background .3s}
+		.cell:last-child{border-right:0}
+		.cell:hover{background:#0F2018}
+		.cell p:not(.mono){color:var(--dim);font-size:15px;margin-bottom:28px}
+		.sig{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);font-size:11px}
+		.sig b{color:var(--warn);font-weight:500}
+
+		.pipe{position:relative;height:2px;background:var(--line);margin:clamp(36px,4.5vw,64px) 0 0}
+		.pipe::before,.pipe::after,.pipe i{content:'';position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--ok)}
+		.pipe::before{left:0}.pipe::after{left:calc(33.33% + 8px)}.pipe i{left:calc(66.66% + 16px)}
+		.pipe{overflow:visible;background:linear-gradient(90deg,var(--ok),var(--ok)) no-repeat 0 0/0 100%,var(--line)}
+		.pipe.in{background-size:100% 100%,auto;transition:background-size 2.4s ease .3s,opacity .8s,transform .8s}
+		.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:26px}
+		.stage p:not(.mono){color:#B6C3BA;max-width:40ch}
+		.stage h3{font-size:clamp(1.5rem,2.3vw,2.1rem);letter-spacing:-.03em;margin:10px 0 12px}
+		.opt{border:1px solid var(--line);border-radius:999px;padding:2px 8px;margin-left:8px;font-size:10px}
+		.stage table{margin-top:20px;border-collapse:collapse;width:100%;max-width:380px;text-transform:none;letter-spacing:.01em}
+		.stage td{padding:9px 0;border-top:1px solid var(--line)}
+		.stage td:first-child{color:var(--ok);width:86px}
+
+		.sw-wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,4vw,72px);align-items:start}
+		.total{margin-top:34px;font-size:12px}
+		.total b{display:block;font-family:'Geist',sans-serif;font-size:clamp(2.6rem,4.6vw,4.2rem);font-weight:500;letter-spacing:-.04em;color:var(--text);line-height:1.1;margin-top:6px}
+		#save{color:var(--ok)}
+		.sw{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+		.sw-head,.row{display:grid;grid-template-columns:1.5fr .8fr .8fr 118px;gap:12px;align-items:center;padding:14px 20px}
+		.sw-head{border-bottom:1px solid var(--line)}
+		.row{border-bottom:1px solid var(--line);font-size:15px;transition:background .3s}
+		.row.own{background:rgba(143,227,160,.06)}
+		.row .sc{font-family:'Geist Mono',monospace;font-size:14px}
+		.row .sc.lo{color:var(--warn)}
+		.tg{appearance:none;border:1px solid var(--line);background:#07110C;color:var(--dim);font:500 11px 'Geist Mono',monospace;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:7px 10px 7px 30px;position:relative;cursor:pointer;transition:all .25s;text-align:left;width:108px}
+		.tg::before{content:'';position:absolute;left:6px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;background:var(--dim);transition:all .25s}
+		.tg.on{color:#06100B;background:var(--ok);border-color:var(--ok);padding:7px 30px 7px 12px}
+		.tg.on::before{left:calc(100% - 20px);background:#06100B}
+		.tg:disabled{cursor:not-allowed;opacity:.55;border-style:dashed}
+		.sw-foot{padding:13px 20px;text-transform:none;letter-spacing:.01em}
+
+		.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+		.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:26px}
+		.panel p:not(.mono){color:#B6C3BA;font-size:15.5px}
+		.panel h3{font-size:1.45rem;letter-spacing:-.025em}
+		.h3b{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+		.tm{margin-top:22px;font-size:11px}
+
+		.close{margin:clamp(80px,10vw,160px) var(--pad) 0;padding:clamp(48px,7vw,110px) clamp(24px,4vw,64px);border:1px solid var(--line);border-radius:14px;background:radial-gradient(ellipse at 85% 120%,rgba(143,227,160,.22),transparent 60%),var(--panel)}
+		.close h2{font-size:clamp(2.6rem,7.4vw,7.4rem);max-width:none;margin:22px 0 34px;line-height:.95}
+		.mail{font-family:'Geist Mono',monospace;font-size:clamp(1rem,2vw,1.6rem);color:var(--ok);border-bottom:1px solid currentColor;padding-bottom:4px}
+		.foot{display:flex;justify-content:space-between;padding:26px var(--pad)}
+
+		@media (max-width:980px){
+			.nav nav{display:none}
+			.hero,.sw-wrap{grid-template-columns:1fr}
+			.cells{grid-template-columns:1fr 1fr}.cell:nth-child(2){border-right:0}.cell:nth-child(-n+2){border-bottom:1px solid var(--line)}
+			.stages,.grid3{grid-template-columns:1fr}
+			.pipe{display:none}
+		}
+		@media (max-width:560px){
+			.cells{grid-template-columns:1fr}.cell{border-right:0;border-bottom:1px solid var(--line)}
+			.tr{grid-template-columns:118px 1fr}
+			.sw-head,.row{grid-template-columns:1.3fr .6fr .6fr 108px;padding:12px;gap:6px}
+		}
+		@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.ticker div,.dot{animation:none}html{scroll-behavior:auto}}
+	</style>
+
+	<script is:inline>
+		const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
+		document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+
+		// Monitor: every value is a function of time, on a 16-second loop. Illustrative.
+		(() => {
+			const T = 16, still = matchMedia('(prefers-reduced-motion:reduce)').matches;
+			const n = (t, k) => Math.sin(t * 2.1 + k) * 0.5 + Math.sin(t * 5.3 + k * 2) * 0.3 + Math.sin(t * 11.7 + k * 3) * 0.2;
+			const bump = (t) => { const c = ((t % T) + T) % T; if (c < 3 || c > 10.5) return 0; const u = (c - 3) / 7.5; return Math.pow(Math.sin(Math.PI * Math.pow(u, 0.55)), 2); };
+			const S = [
+				{ c: 'cq', v: 'vq', f: (t) => 94.2 + n(t, 1) * 0.5 - 7.4 * bump(t), lo: 84, hi: 97, fmt: (x) => x.toFixed(1) + '%', bad: (x) => x < 92 },
+				{ c: 'cd', v: 'vd', f: (t) => 0.03 + Math.abs(n(t, 4)) * 0.012 + 0.21 * bump(t), lo: 0, hi: 0.3, fmt: (x) => x.toFixed(2), bad: (x) => x > 0.08 },
+				{ c: 'cc', v: 'vc', f: (t) => 41 + n(t * 0.6, 7) * 1.1, lo: 34, hi: 48, fmt: (x) => '£' + x.toFixed(0), bad: () => false },
+			].map((s) => ({ ...s, cv: document.getElementById(s.c), el: document.getElementById(s.v) }));
+			const LOG = [
+				[0.4, '', 'evals nightly run', '220 / 220 pass', 'g'],
+				[3.0, 'w', 'model version changed', 'provider'],
+				[3.9, '', 'eval suite rerun', '220 cases'],
+				[5.2, 'w', '8 regressions', 'flagged'],
+				[6.6, '', 'routed to reviewer', '2 corrected'],
+				[8.4, '', 'prompt fix deployed', 'rerun'],
+				[10.6, '', 'quality restored', '94.1%', 'g'],
+				[12.6, '', 'report sent', 'no user impact', 'g'],
+			];
+			const logEl = document.getElementById('log'); let shown = -1, last = -1;
+			const draw = (now) => {
+				const t = still ? 6.2 : now / 1000, c = t % T;
+				S.forEach((s) => {
+					const cv = s.cv, dpr = Math.min(2, devicePixelRatio || 1), w = cv.clientWidth, h = cv.clientHeight;
+					if (cv.width !== w * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+					const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+					const cur = s.f(t), bad = s.bad(cur), col = bad ? '#E3C76A' : '#8FE3A0';
+					g.beginPath();
+					for (let x = 0; x <= w - 10; x += 2) { const v = s.f(t - (w - 10 - x) * 0.022), yy = h - 10 - ((v - s.lo) / (s.hi - s.lo)) * (h - 20); x ? g.lineTo(x, yy) : g.moveTo(x, yy); }
+					g.strokeStyle = col; g.lineWidth = 1.6; g.stroke();
+					g.lineTo(w - 10, h); g.lineTo(0, h); g.closePath();
+					const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, bad ? 'rgba(227,199,106,.2)' : 'rgba(143,227,160,.18)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fill();
+					const yy = h - 10 - ((cur - s.lo) / (s.hi - s.lo)) * (h - 20);
+					g.beginPath(); g.arc(w - 10, yy, 3, 0, 7); g.fillStyle = col; g.fill();
+					s.el.textContent = s.fmt(cur); s.el.classList.toggle('bad', bad);
+				});
+				if (c < last) { shown = -1; }
+				last = c;
+				const k = LOG.filter((l) => l[0] <= c).length - 1;
+				if (k !== shown) {
+					if (shown === -1 && k >= 0 && !still) logEl.innerHTML = '';
+					for (let i = Math.max(0, shown + 1); i <= k; i++) {
+						const l = LOG[i], p = document.createElement('p'); p.className = l[1] + ' ' + (l[4] || '');
+						const hh = 9 + Math.floor(l[0] / 4), mm = String(Math.floor((l[0] * 13) % 60)).padStart(2, '0');
+						p.innerHTML = '<span>' + String(hh).padStart(2, '0') + ':' + mm + '</span><span>' + l[2] + '</span><span>' + l[3] + '</span>';
+						logEl.append(p);
+					}
+					shown = k;
+				}
+				if (!still) requestAnimationFrame(draw);
+			};
+			requestAnimationFrame(draw);
+		})();
+
+		// Switching demo. A task can move only when the owned score matches the rented one.
+		(() => {
+			const tasks = [
+				{ n: 'Extract contract terms', r: 96, o: 96, cr: 14.0, co: 4.2 },
+				{ n: 'Classify risk', r: 93, o: 94, cr: 6.5, co: 1.9 },
+				{ n: 'Summarise for review', r: 95, o: 95, cr: 9.0, co: 2.8 },
+				{ n: 'Draft the response', r: 91, o: 84, cr: 11.5, co: 3.6 },
+			];
+			const rows = document.getElementById('rows'), tot = document.getElementById('tot'), save = document.getElementById('save');
+			const upd = () => {
+				const c = tasks.reduce((a, t) => a + (t.own ? t.co : t.cr), 0), d = 41 - c;
+				tot.textContent = '£' + c.toFixed(2);
+				save.textContent = d > 0.01 ? '−' + Math.round((d / 41) * 100) + '% · quality unchanged' : '';
+			};
+			tasks.forEach((t) => {
+				const ok = t.o >= t.r, row = document.createElement('div'); row.className = 'row';
+				row.innerHTML = '<span>' + t.n + '</span><span class="sc">' + t.r + '%</span><span class="sc ' + (ok ? '' : 'lo') + '">' + t.o + '%</span>';
+				const b = document.createElement('button'); b.className = 'tg'; b.type = 'button'; b.textContent = ok ? 'Rented' : 'Not yet'; b.disabled = !ok;
+				b.setAttribute('aria-pressed', 'false');
+				b.onclick = () => { t.own = !t.own; b.classList.toggle('on', t.own); b.textContent = t.own ? 'Owned' : 'Rented'; b.setAttribute('aria-pressed', t.own); row.classList.toggle('own', t.own); upd(); };
+				row.append(b); rows.append(row);
+			});
+			upd();
+		})();
+	</script>
+</body>
+</html>

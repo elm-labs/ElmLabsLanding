@@ -1,0 +1,318 @@
+---
+// Variant A — "Proof". Leads with trust in production. Light, editorial, chart-led.
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const mail = 'mailto:jawwad@elmlabs.ai?subject=20%20minutes';
+---
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+	<title>Elm Labs — AI you can trust in production</title>
+	<meta name="description" content="Elm Labs engineers embed in your team, take one critical AI workflow into production, and build the evidence that it keeps working." />
+	<meta name="theme-color" content="#F6F0E4" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+	<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body style={`--logo:url(${base}logofilledwhite.svg)`}>
+	<header class="nav">
+		<a class="brand" href="#top"><span class="leaf"></span>Elm Labs</a>
+		<nav>
+			<a href="#problem">Problem</a>
+			<a href="#approach">Approach</a>
+			<a href="#who">Who it's for</a>
+			<a href="#start">How we start</a>
+			<a href="#team">Team</a>
+		</nav>
+		<a class="btn sm" href={mail}>Book 20 minutes</a>
+	</header>
+
+	<main id="top">
+		<section class="hero">
+			<p class="mono eyebrow rv">Elm Labs · Production AI engineering · UK</p>
+			<h1 class="rv">AI you can<br />trust in<br /><em>production.</em></h1>
+			<div class="hero-row">
+				<p class="mono meta rv">One workflow<br />About a month<br />Hard evidence</p>
+				<div class="lede rv">
+					<p>Pilots work. Production is where AI stalls, because nobody can prove it still works as models, data and processes change.</p>
+					<p>We take one critical workflow live with your team. Then we build the evidence that it stays good.</p>
+					<div class="cta-row">
+						<a class="btn" href={mail}>Book 20 minutes <span>→</span></a>
+						<span class="mono note">No deck.</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="fig rv" aria-label="Illustrative chart of workflow quality over six months">
+			<div class="fig-head mono">
+				<span>Fig. 1 — Quality of one workflow over six months</span>
+				<span>Illustrative</span>
+			</div>
+			<div class="fig-scroll"><svg id="chart" viewBox="0 0 1200 360" role="img"></svg></div>
+			<div class="fig-foot">
+				<p><i class="k k-a"></i><b>With evaluation.</b> Each change costs a dip. The evaluations catch it within a day and the team fixes it.</p>
+				<p><i class="k k-b"></i><b>Without.</b> Each change costs the same dip. Nobody sees it, so nobody fixes it.</p>
+			</div>
+		</section>
+
+		<section class="sec" id="problem">
+			<div class="sec-label mono rv"><span>01</span>The problem</div>
+			<div class="sec-body">
+				<h2 class="rv">A demo proves it worked once. Production asks whether it still works <em>today.</em></h2>
+				<div class="three">
+					<div class="rv"><h3>Models change.</h3><p>Your vendor ships a new version. The same prompt now gives a different answer.</p></div>
+					<div class="rv"><h3>Data changes.</h3><p>A new source arrives, in a new format, with an edge case nobody tested.</p></div>
+					<div class="rv"><h3>Processes change.</h3><p>The policy moves. Yesterday's right answer is today's wrong one.</p></div>
+				</div>
+				<p class="pull rv">Without a measure of good work, the first person to notice is a customer.</p>
+			</div>
+		</section>
+
+		<section class="sec" id="approach">
+			<div class="sec-label mono rv"><span>02</span>Approach</div>
+			<div class="sec-body">
+				<h2 class="rv">Three steps. You can stop after any of them.</h2>
+				<ol class="steps">
+					<li class="rv">
+						<span class="mono n">01</span>
+						<h3>Get it live</h3>
+						<p>Our engineers embed in your team and take one critical workflow into production, on the models you already use. Nothing changes for your users on day one.</p>
+						<span class="mono tag">You get<br /><b>A working workflow</b></span>
+					</li>
+					<li class="rv">
+						<span class="mono n">02</span>
+						<h3>Prove it works</h3>
+						<p>We build evaluations from how your experts decide: what they checked, what they corrected, what happened next. The evaluations track quality, drift and cost every day the workflow runs.</p>
+						<span class="mono tag">You get<br /><b>A daily measure of good work</b></span>
+					</li>
+					<li class="rv">
+						<span class="mono n">03</span>
+						<h3>Own it, when you're ready</h3>
+						<p>The same evaluations can train open-weight models that you host. You switch a task only when the owned model matches the one you rent. You can switch back any time.</p>
+						<span class="mono tag">You get<br /><b>Models you control</b></span>
+					</li>
+				</ol>
+			</div>
+		</section>
+
+		<section class="sec" id="who">
+			<div class="sec-label mono rv"><span>03</span>Who it's for</div>
+			<div class="sec-body">
+				<div class="two">
+					<div class="card rv">
+						<p class="mono">Proof and control</p>
+						<h3>Energy, utilities, industrials and construction</h3>
+						<p>Your decisions carry safety, regulatory or contractual weight. You have to show a board, an auditor or a client why the system's answer was right.</p>
+					</div>
+					<div class="card rv">
+						<p class="mono">Reliability at scale</p>
+						<h3>Fintech, neobanks and gaming</h3>
+						<p>AI already runs in your customer-facing work. You want quality held steady, spend under control, and no single vendor setting your roadmap.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="sec" id="start">
+			<div class="sec-label mono rv"><span>04</span>How we start</div>
+			<div class="sec-body start">
+				<h2 class="rv">One workflow.<br />About a month.</h2>
+				<div class="rv">
+					<p class="big">You pick a workflow that matters. We work on it inside your team. At the end you hold hard evidence, and no commitment to production.</p>
+					<dl class="evidence">
+						<div><dt class="mono">Quality</dt><dd>How often the work matches what your experts would have done.</dd></div>
+						<div><dt class="mono">Drift</dt><dd>How that number moves when the model, the data or the process changes.</dd></div>
+						<div><dt class="mono">Cost</dt><dd>What each task costs today, and what it would cost on other models.</dd></div>
+					</dl>
+				</div>
+			</div>
+		</section>
+
+		<section class="sec" id="team">
+			<div class="sec-label mono rv"><span>05</span>Team</div>
+			<div class="sec-body">
+				<h2 class="rv">Ten-plus years at Palantir between us. Both Cambridge engineers.</h2>
+				<div class="two">
+					<div class="person rv">
+						<h3>Jawwad Farid</h3>
+						<p>Backend tech lead at Palantir, on Ontology infrastructure. Founding engineer at two AI startups.</p>
+					</div>
+					<div class="person rv">
+						<h3>Burhan Ashraf</h3>
+						<p>Forward-deployed tech lead at Palantir. Led one of its largest UK government accounts.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="close">
+			<h2 class="rv">Book 20 minutes.<br /><em>No deck.</em></h2>
+			<a class="mail rv" href={mail}>jawwad@elmlabs.ai <span>→</span></a>
+		</section>
+	</main>
+
+	<footer class="foot mono">
+		<span><span class="leaf"></span> Elm Labs</span>
+		<a href="https://www.linkedin.com/company/elm-labs-ai" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+		<span>© 2026</span>
+	</footer>
+
+	<style is:global>
+		:root{--paper:#F6F0E4;--ink:#12241C;--green:#1F4D3A;--muted:#5C6A61;--rule:rgba(18,36,28,.16);--rust:#B5532F;--pad:clamp(18px,3vw,44px)}
+		*{box-sizing:border-box;margin:0;padding:0}
+		html{scroll-behavior:smooth}
+		body{background:var(--paper);color:var(--ink);font-family:'Inter Tight',system-ui,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+		a{color:inherit;text-decoration:none}
+		em{font-style:normal;color:var(--green)}
+		.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+		.leaf{display:inline-block;width:.82em;height:1em;vertical-align:-.12em;margin-right:.4em;background:currentColor;-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat}
+		.rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+		.rv.in{opacity:1;transform:none}
+
+		.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px var(--pad);background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+		.brand{font-weight:600;font-size:18px;letter-spacing:-.02em;color:var(--green)}
+		.nav nav{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+		.nav nav a:hover{color:var(--ink)}
+		.btn{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:var(--paper);padding:15px 24px;border-radius:999px;font-weight:500;font-size:16px;transition:background .2s,transform .2s}
+		.btn:hover{background:var(--ink);transform:translateY(-1px)}
+		.btn span{transition:transform .2s}.btn:hover span{transform:translateX(4px)}
+		.btn.sm{padding:9px 16px;font-size:14px}
+
+		.hero{padding:clamp(40px,7vw,96px) var(--pad) clamp(40px,5vw,72px)}
+		.eyebrow{margin-bottom:clamp(20px,3vw,40px)}
+		h1{font-size:clamp(3.4rem,13.2vw,13.5rem);font-weight:600;line-height:.86;letter-spacing:-.055em;margin-left:-.05em}
+		.hero-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--pad);margin-top:clamp(36px,5vw,72px);align-items:end}
+		.meta{line-height:1.9}
+		.lede{max-width:560px}
+		.lede p{font-size:clamp(18px,1.55vw,22px);line-height:1.4;letter-spacing:-.01em;margin-bottom:.8em}
+		.cta-row{display:flex;align-items:center;gap:18px;margin-top:28px}
+
+		.fig{margin:0 var(--pad);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+		.fig-head{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--rule)}
+		.fig-scroll{overflow-x:auto}
+		#chart{display:block;width:100%;min-width:760px;height:auto}
+		#chart text{font-family:'JetBrains Mono',monospace;font-size:11px;fill:var(--muted);letter-spacing:.03em}
+		#chart .ev{opacity:0;transition:opacity .6s}
+		#chart .ev.on{opacity:1}
+		.fig-foot{display:grid;grid-template-columns:1fr 1fr;gap:var(--pad);padding:18px 0;border-top:1px solid var(--rule);font-size:15px;color:var(--muted)}
+		.fig-foot b{color:var(--ink);font-weight:600}
+		.k{display:inline-block;width:22px;height:0;border-top:2.5px solid var(--green);vertical-align:middle;margin-right:10px}
+		.k-b{border-top:2px dashed var(--rust)}
+
+		.sec{display:grid;grid-template-columns:minmax(120px,1fr) 5fr;gap:var(--pad);padding:clamp(64px,9vw,150px) var(--pad) 0}
+		.sec-label{position:sticky;top:76px;align-self:start;padding-top:10px;border-top:1px solid var(--ink);color:var(--ink)}
+		.sec-label span{display:block;color:var(--muted);margin-bottom:4px}
+		h2{font-size:clamp(2rem,4.6vw,4.6rem);font-weight:600;line-height:1;letter-spacing:-.04em;max-width:18ch;margin-bottom:clamp(32px,4.5vw,72px)}
+		h3{font-size:clamp(1.25rem,1.8vw,1.75rem);font-weight:600;letter-spacing:-.025em;line-height:1.15;margin-bottom:10px}
+		.three{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--pad)}
+		.three>div{border-top:1px solid var(--rule);padding-top:18px}
+		.three p,.card p:last-child,.person p,.steps p{color:var(--muted)}
+		.pull{font-size:clamp(1.3rem,2.2vw,2.1rem);letter-spacing:-.025em;line-height:1.2;max-width:26ch;margin-top:clamp(40px,5vw,80px);padding-left:20px;border-left:3px solid var(--rust)}
+
+		.steps{list-style:none;border-top:1px solid var(--ink)}
+		.steps li{display:grid;grid-template-columns:70px 1.1fr 1.6fr 1fr;gap:var(--pad);align-items:start;padding:30px 0;border-bottom:1px solid var(--rule);transition:background .3s,padding .3s}
+		.steps li:hover{background:rgba(31,77,58,.06);padding-left:14px;padding-right:14px}
+		.steps .n{color:var(--green);padding-top:8px}
+		.steps h3{font-size:clamp(1.5rem,2.6vw,2.5rem);margin:0}
+		.steps .tag{line-height:1.7}
+		.steps .tag b{color:var(--ink);font-weight:500}
+
+		.two{display:grid;grid-template-columns:1fr 1fr;gap:var(--pad)}
+		.card{background:#EFE7D6;padding:clamp(24px,3vw,44px);border-radius:4px;min-height:300px;display:flex;flex-direction:column}
+		.card h3{font-size:clamp(1.6rem,2.8vw,2.7rem);letter-spacing:-.035em;line-height:1.02;margin:auto 0 18px;padding-top:60px}
+		.card:nth-child(2){background:var(--green);color:var(--paper)}
+		.card:nth-child(2) .mono,.card:nth-child(2) p:last-child{color:rgba(246,240,228,.72)}
+
+		.start{display:grid;grid-template-columns:1fr 1fr;gap:var(--pad)}
+		.big{font-size:clamp(18px,1.6vw,23px);line-height:1.4;letter-spacing:-.01em;margin-bottom:32px}
+		.evidence div{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:16px 0;border-top:1px solid var(--rule)}
+		.evidence dt{color:var(--green);padding-top:3px}
+		.person{border-top:1px solid var(--ink);padding-top:18px}
+		.person h3{font-size:clamp(1.5rem,2.4vw,2.2rem)}
+		.person p{max-width:38ch}
+
+		.close{margin-top:clamp(80px,11vw,180px);padding:clamp(60px,9vw,140px) var(--pad);background:var(--green);color:var(--paper)}
+		.close h2{font-size:clamp(3rem,11vw,11rem);line-height:.88;letter-spacing:-.055em;max-width:none;margin-bottom:clamp(32px,5vw,64px)}
+		.close em{color:#D8C377}
+		.mail{font-size:clamp(1.3rem,3vw,2.6rem);letter-spacing:-.03em;border-bottom:2px solid currentColor;padding-bottom:4px}
+		.mail span{display:inline-block;transition:transform .25s}.mail:hover span{transform:translateX(10px)}
+		.foot{display:flex;justify-content:space-between;padding:20px var(--pad);background:var(--green);color:rgba(246,240,228,.7);border-top:1px solid rgba(246,240,228,.2)}
+
+		@media (max-width:860px){
+			.nav nav{display:none}
+			.hero-row,.fig-foot,.three,.two,.start{grid-template-columns:1fr}
+			.meta{display:none}
+			.sec{grid-template-columns:1fr}
+			.sec-label{position:static}
+			.steps li{grid-template-columns:1fr;gap:10px}
+			.card{min-height:0}
+		}
+		@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+	</style>
+
+	<script is:inline>
+		const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
+		document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
+
+		// Fig. 1: two lines through the same three changes. Illustrative data.
+		(() => {
+			const svg = document.getElementById('chart');
+			const NS = 'http://www.w3.org/2000/svg';
+			const x0 = 56, x1 = 1000, yT = 44, yB = 318;
+			const y = (q) => yB - ((q - 60) / 40) * (yB - yT);
+			const ev = [{ x: 280, d: 9, l: 'Model updated' }, { x: 540, d: 11, l: 'New data source' }, { x: 800, d: 8, l: 'Process changed' }];
+			let s = 11; const rnd = () => ((s = (s * 16807) % 2147483647) / 2147483647 - 0.5);
+			const A = [], B = [];
+			for (let x = x0; x <= x1; x += 6) {
+				let a = 94 + rnd() * 1.3, b = 94 + rnd() * 1.3;
+				ev.forEach((e) => { if (x > e.x) { const t = x - e.x; a -= e.d * Math.min(1, t / 14) * Math.exp(-Math.max(0, t - 14) / 24); b -= e.d * 0.85 * Math.min(1, t / 14); } });
+				A.push([x, y(a)]); B.push([x, y(b)]);
+			}
+			const el = (n, a, t) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); if (t) e.textContent = t; return e; };
+			const path = (p) => 'M' + p.map((q) => q[0] + ' ' + q[1].toFixed(1)).join('L');
+			[100, 90, 80, 70].forEach((q) => {
+				svg.append(el('line', { x1: x0, x2: x1, y1: y(q), y2: y(q), stroke: 'rgba(18,36,28,.12)' }));
+				svg.append(el('text', { x: x0 - 10, y: y(q) + 4, 'text-anchor': 'end' }, q + '%'));
+			});
+			['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'].forEach((m, i) => svg.append(el('text', { x: x0 + (i * (x1 - x0)) / 6 + 4, y: 346 }, m)));
+			const defs = el('defs', {}), cp = el('clipPath', { id: 'cp' }), r = el('rect', { x: 0, y: 0, width: 0, height: 360 });
+			cp.append(r); defs.append(cp); svg.append(defs);
+			const g = el('g', { 'clip-path': 'url(#cp)' });
+			g.append(el('path', { d: path(B), fill: 'none', stroke: '#B5532F', 'stroke-width': 2, 'stroke-dasharray': '6 6' }));
+			g.append(el('path', { d: path(A), fill: 'none', stroke: '#1F4D3A', 'stroke-width': 3, 'stroke-linejoin': 'round' }));
+			svg.append(g);
+			const evs = ev.map((e) => {
+				const gg = el('g', { class: 'ev' });
+				gg.append(el('line', { x1: e.x, x2: e.x, y1: 30, y2: yB, stroke: '#12241C', 'stroke-dasharray': '2 4' }));
+				gg.append(el('text', { x: e.x + 8, y: 26, style: 'fill:#12241C' }, e.l.toUpperCase()));
+				const px = e.x + 14, py = y(94 - e.d);
+				gg.append(el('circle', { cx: px, cy: py, r: 6, fill: '#F6F0E4', stroke: '#1F4D3A', 'stroke-width': 2.5 }));
+				gg.append(el('text', { x: px + 12, y: py + 18, style: 'fill:#1F4D3A' }, 'CAUGHT · DAY 1'));
+				svg.append(gg); return [e.x, gg];
+			});
+			const endA = el('g', { class: 'ev' }), endB = el('g', { class: 'ev' });
+			endA.append(el('text', { x: x1 + 14, y: A[A.length - 1][1] - 4, style: 'fill:#1F4D3A;font-size:22px;font-weight:500;letter-spacing:-.02em' }, '94%'));
+			endA.append(el('text', { x: x1 + 14, y: A[A.length - 1][1] + 14, style: 'fill:#1F4D3A' }, 'WITH EVALUATION'));
+			endB.append(el('text', { x: x1 + 14, y: B[B.length - 1][1] - 2, style: 'fill:#B5532F;font-size:22px;font-weight:500;letter-spacing:-.02em' }, '70%'));
+			endB.append(el('text', { x: x1 + 14, y: B[B.length - 1][1] + 16, style: 'fill:#B5532F' }, 'WITHOUT · UNNOTICED'));
+			svg.append(endA, endB);
+			const still = matchMedia('(prefers-reduced-motion:reduce)').matches;
+			const run = () => {
+				const t0 = performance.now(), D = still ? 1 : 3400;
+				const step = (t) => {
+					const p = Math.min(1, (t - t0) / D), w = x0 + (x1 - x0 + 4) * (1 - Math.pow(1 - p, 2));
+					r.setAttribute('width', w);
+					evs.forEach(([x, gg]) => { if (w > x + 20) gg.classList.add('on'); });
+					if (p < 1) requestAnimationFrame(step); else { endA.classList.add('on'); endB.classList.add('on'); }
+				};
+				requestAnimationFrame(step);
+			};
+			const o = new IntersectionObserver((es) => { if (es[0].isIntersecting) { run(); o.disconnect(); } }, { threshold: 0.35 });
+			o.observe(svg);
+		})();
+	</script>
+</body>
+</html>

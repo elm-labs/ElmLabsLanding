@@ -1,0 +1,273 @@
+---
+// Variant C — "Embed". Leads with people and the first month. Warm, brand gradient, big type.
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const mail = 'mailto:jawwad@elmlabs.ai?subject=20%20minutes';
+const problem = "Pilots work. Production is where AI stalls, because no one can prove it's still working as models, data and processes change.".split(' ');
+---
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+	<title>Elm Labs — Get AI into production. Then own it.</title>
+	<meta name="description" content="Elm Labs engineers embed in your team, take one critical workflow live on the models you already use, prove it works and leave you in control." />
+	<meta name="theme-color" content="#173F31" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+	<noscript><style>.rv{opacity:1!important;transform:none!important}.w{opacity:1!important}</style></noscript>
+</head>
+<body style={`--logo:url(${base}logofilledwhite.svg)`}>
+	<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch" /><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0" /></filter></svg>
+
+	<section class="hero grad" id="top">
+		<div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
+		<div class="grain" aria-hidden="true"></div>
+		<div class="bigleaf" aria-hidden="true"></div>
+		<header class="nav">
+			<a class="brand" href="#top"><span class="leaf"></span>Elm Labs</a>
+			<nav>
+				<a href="#month">The first month</a>
+				<a href="#what">What we do</a>
+				<a href="#who">Who it's for</a>
+				<a href="#team">Team</a>
+			</nav>
+			<a class="btn light sm" href={mail}>Book 20 minutes</a>
+		</header>
+		<div class="hero-in">
+			<h1 class="rv">Get AI into production. <em>Then own it.</em></h1>
+			<div class="hero-row">
+				<p class="lede rv">We're engineers who embed in your team. We take one critical workflow live on the models you already use, prove it works, and leave you in control of it.</p>
+				<div class="cta-row rv">
+					<a class="btn light" href={mail}>Book 20 minutes <span>→</span></a>
+					<span class="note">No deck. Just a conversation.</span>
+				</div>
+			</div>
+		</div>
+		<ul class="facts">
+			<li><b>10+ years</b> at Palantir between the founders</li>
+			<li><b>One workflow,</b> about a month, to start</li>
+			<li><b>UK team.</b> Cambridge engineers</li>
+		</ul>
+	</section>
+
+	<main>
+		<section class="say" id="why">
+			<p class="kicker rv">Why we exist</p>
+			<p class="scrolltext" id="st">{problem.map((w) => <span class="w">{w + ' '}</span>)}</p>
+		</section>
+
+		<section class="sec" id="month">
+			<div class="head">
+				<p class="kicker rv">The first month</p>
+				<h2 class="rv">Four weeks, inside your team, on <em>one workflow.</em></h2>
+			</div>
+			<div class="rail" aria-hidden="true"><i id="railfill"></i></div>
+			<div class="weeks">
+				<article class="wk rv"><span class="num">1</span><h3>Sit with your experts</h3><p>You pick a workflow that matters. We learn how your best people do it and what a good result looks like.</p></article>
+				<article class="wk rv"><span class="num">2</span><h3>Get it running</h3><p>We build it on the models you already use, inside your systems. Your users change nothing.</p></article>
+				<article class="wk rv"><span class="num">3</span><h3>Measure it</h3><p>We turn your experts' decisions into evaluations. They score every run for quality, drift and cost.</p></article>
+				<article class="wk rv"><span class="num">4</span><h3>Show the evidence</h3><p>You get the numbers and an honest read of what it would take to run this for real. No production commitment.</p></article>
+			</div>
+		</section>
+
+		<section class="sec" id="what">
+			<div class="head">
+				<p class="kicker rv">What we do</p>
+				<h2 class="rv">Get it live. Prove it works. <em>Own it when you're ready.</em></h2>
+			</div>
+			<div class="cards">
+				<article class="c c1 rv">
+					<span class="pill">Now</span>
+					<h3>Get it live</h3>
+					<p>Our engineers work inside your team on one critical workflow, on the models you already use. We write the code, wire the systems and stay until it runs.</p>
+				</article>
+				<article class="c c2 rv">
+					<span class="pill">Every day after</span>
+					<h3>Prove it works</h3>
+					<p>Evaluations built from how your experts decide. They track quality, drift and cost in production, so you know the day something slips.</p>
+				</article>
+				<article class="c c3 rv">
+					<span class="pill">When you choose</span>
+					<h3>Own it</h3>
+					<p>The same evaluations train open-weight models you host. Switch only when they match the models you rent. Switch back any time.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="sec" id="who">
+			<div class="head">
+				<p class="kicker rv">Who it's for</p>
+				<h2 class="rv">Two kinds of company call us.</h2>
+			</div>
+			<div class="duo">
+				<article class="who rv">
+					<div class="pills"><span>Energy</span><span>Utilities</span><span>Industrials</span><span>Construction</span></div>
+					<h3>You need proof and control.</h3>
+					<p>Your work carries safety, regulatory or contractual weight. Before AI touches it, you need to show why its answers are right, and keep the data in your hands.</p>
+				</article>
+				<article class="who rv">
+					<div class="pills"><span>Fintech</span><span>Neobanks</span><span>Gaming</span></div>
+					<h3>You need reliability at scale.</h3>
+					<p>AI already runs in front of your customers. You want quality that holds, a bill you can predict, and the freedom to change model vendor.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="sec" id="team">
+			<div class="head">
+				<p class="kicker rv">Team</p>
+				<h2 class="rv">You work with the founders.</h2>
+			</div>
+			<div class="duo">
+				<article class="person rv">
+					<div class="mono-c">JF</div>
+					<div>
+						<h3>Jawwad Farid</h3>
+						<p>Backend tech lead at Palantir, on Ontology infrastructure. Founding engineer at two AI startups. Cambridge Engineering.</p>
+					</div>
+				</article>
+				<article class="person rv">
+					<div class="mono-c">BA</div>
+					<div>
+						<h3>Burhan Ashraf</h3>
+						<p>Forward-deployed tech lead at Palantir. Led one of its largest UK government accounts. Cambridge Engineering.</p>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section class="close grad">
+			<div class="grain" aria-hidden="true"></div>
+			<h2 class="rv">Book 20 minutes. <em>No deck.</em></h2>
+			<p class="rv">Tell us about one workflow you wish you could trust. We'll tell you how we'd get it there.</p>
+			<a class="btn light rv" href={mail}>jawwad@elmlabs.ai <span>→</span></a>
+		</section>
+	</main>
+	<footer class="foot"><span><span class="leaf"></span>Elm Labs</span><a href="https://www.linkedin.com/company/elm-labs-ai" target="_blank" rel="noopener noreferrer">LinkedIn</a><span>© 2026</span></footer>
+
+	<style is:global>
+		:root{--cream:#FAF3E9;--ink:#16302A;--green:#1F4D3A;--mid:#2E7A5E;--olive:#7C9358;--gold:#C2A95E;--muted:#5F6E66;--pad:clamp(18px,4vw,64px)}
+		*{box-sizing:border-box;margin:0;padding:0}
+		html{scroll-behavior:smooth}
+		body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased}
+		a{color:inherit;text-decoration:none}
+		em{font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.02em}
+		.leaf{display:inline-block;width:.82em;height:1em;vertical-align:-.12em;margin-right:.4em;background:currentColor;-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat}
+		.rv{opacity:0;transform:translateY(26px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+		.rv.in{opacity:1;transform:none}
+
+		.grad{position:relative;overflow:hidden;background:linear-gradient(108deg,#143A2D 0%,#236450 30%,#5F8A5A 60%,#B7A25C 100%);color:var(--cream)}
+		.grain{position:absolute;inset:0;filter:url(#grain);opacity:.16;mix-blend-mode:overlay;pointer-events:none}
+		.blobs i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.75;animation:drift 22s ease-in-out infinite alternate}
+		.blobs i:nth-child(1){width:52vw;height:52vw;left:-12vw;top:-18vw;background:#0F3327}
+		.blobs i:nth-child(2){width:44vw;height:44vw;right:-8vw;bottom:-20vw;background:#D8B964;animation-duration:28s;animation-delay:-6s}
+		.blobs i:nth-child(3){width:34vw;height:34vw;left:38vw;top:22vh;background:#3E9A78;opacity:.55;animation-duration:19s;animation-delay:-11s}
+		@keyframes drift{to{transform:translate(9vw,7vh) scale(1.18)}}
+
+		.hero{margin:10px;border-radius:28px;min-height:min(calc(100vh - 20px),1000px);display:flex;flex-direction:column}
+		.nav{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px var(--pad)}
+		.brand{font-weight:600;font-size:20px;letter-spacing:-.02em}
+		.nav nav{display:flex;gap:6px;font-size:15px;background:rgba(250,243,233,.12);border:1px solid rgba(250,243,233,.2);border-radius:999px;padding:5px;backdrop-filter:blur(10px)}
+		.nav nav a{padding:7px 15px;border-radius:999px;transition:background .2s}
+		.nav nav a:hover{background:rgba(250,243,233,.18)}
+		.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;font-weight:600;font-size:17px;background:var(--green);color:var(--cream);transition:transform .25s,box-shadow .25s}
+		.btn.light{background:var(--cream);color:var(--green)}
+		.btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 40px rgba(10,30,22,.3)}
+		.btn span{transition:transform .2s}.btn:hover span{transform:translateX(4px)}
+		.btn.sm{padding:10px 18px;font-size:15px}
+		.bigleaf{position:absolute;right:-6vw;top:8vh;width:min(58vw,820px);aspect-ratio:58/71;background:rgba(250,243,233,.1);-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat;transform:rotate(calc(8deg + var(--rx,0deg))) translate(var(--tx,0),var(--ty,0));transition:transform .6s ease-out}
+		.hero-in{position:relative;z-index:2;margin-top:auto;padding:clamp(40px,6vw,80px) var(--pad) 0}
+		h1{font-size:clamp(3rem,9.4vw,10rem);font-weight:600;line-height:.9;letter-spacing:-.05em;max-width:11ch}
+		h1 em{display:block;letter-spacing:-.04em;color:#F2DFA0}
+		.hero-row{display:grid;grid-template-columns:1.1fr 1fr;gap:var(--pad);align-items:end;margin-top:clamp(28px,4vw,56px)}
+		.lede{font-size:clamp(18px,1.6vw,23px);line-height:1.4;max-width:46ch;opacity:.94}
+		.cta-row{display:flex;align-items:center;gap:18px;justify-content:flex-end;flex-wrap:wrap}
+		.note{font-size:15px;opacity:.8}
+		.facts{position:relative;z-index:2;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);margin:clamp(32px,4vw,56px) var(--pad) 0;border-top:1px solid rgba(250,243,233,.28)}
+		.facts li{padding:18px 0 24px;font-size:15.5px;opacity:.88}
+		.facts b{font-weight:600}
+
+		.say{padding:clamp(80px,12vw,200px) var(--pad) clamp(40px,6vw,100px)}
+		.kicker{font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin-bottom:22px}
+		.scrolltext{font-size:clamp(2rem,5.6vw,5.8rem);font-weight:600;line-height:1.02;letter-spacing:-.045em;max-width:20ch}
+		.w{opacity:.14;transition:opacity .35s}
+		.w.on{opacity:1}
+
+		.sec{padding:clamp(60px,8vw,130px) var(--pad) 0}
+		.head{max-width:900px;margin-bottom:clamp(32px,4vw,60px)}
+		h2{font-size:clamp(2.1rem,4.8vw,4.8rem);font-weight:600;line-height:.98;letter-spacing:-.045em}
+		h2 em{color:var(--mid)}
+		h3{font-size:clamp(1.4rem,2vw,1.9rem);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin-bottom:12px}
+
+		.rail{height:4px;border-radius:4px;background:rgba(31,77,58,.14);margin-bottom:22px;overflow:hidden}
+		.rail i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,var(--green),var(--olive),var(--gold))}
+		.weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+		.wk{background:#fff;border-radius:22px;padding:24px 24px 28px;min-height:290px;display:flex;flex-direction:column;box-shadow:0 1px 0 rgba(22,48,42,.06);transition:transform .35s,box-shadow .35s}
+		.wk:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(22,48,42,.12)}
+		.num{font-family:'Newsreader',serif;font-style:italic;font-size:clamp(4rem,6.5vw,6.4rem);line-height:.8;color:var(--mid);margin-bottom:auto;padding-bottom:36px}
+		.num::before{content:'Week';display:block;font:600 12px 'Bricolage Grotesque',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+		.wk p,.who p,.person p{color:var(--muted);font-size:16.5px}
+
+		.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+		.c{border-radius:26px;padding:clamp(24px,2.6vw,38px);min-height:400px;display:flex;flex-direction:column;color:var(--cream);position:relative;overflow:hidden;transition:transform .35s}
+		.c:hover{transform:translateY(-6px)}
+		.c1{background:#173F31}.c2{background:#2E7A5E}.c3{background:linear-gradient(150deg,#8C9A58,#C2A95E);color:#17301F}
+		.c::after{content:'';position:absolute;right:-70px;bottom:-90px;width:300px;aspect-ratio:58/71;background:currentColor;opacity:.08;-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat;transform:rotate(12deg)}
+		.c h3{font-size:clamp(2rem,3.4vw,3.3rem);letter-spacing:-.045em;line-height:.95;margin:auto 0 16px;padding-top:70px}
+		.c p{font-size:17px;opacity:.9;max-width:34ch;position:relative;z-index:1}
+		.pill{align-self:flex-start;font-size:13px;font-weight:600;border:1px solid currentColor;border-radius:999px;padding:5px 13px;opacity:.85}
+
+		.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+		.who{background:#fff;border-radius:26px;padding:clamp(24px,2.6vw,38px)}
+		.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(48px,6vw,90px)}
+		.pills span{font-size:14px;font-weight:500;background:rgba(46,122,94,.12);color:var(--green);border-radius:999px;padding:6px 14px}
+		.who h3{font-size:clamp(1.7rem,2.8vw,2.6rem);letter-spacing:-.04em}
+		.person{display:flex;gap:22px;align-items:flex-start;background:#fff;border-radius:26px;padding:clamp(24px,2.6vw,38px)}
+		.mono-c{flex:none;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:26px;letter-spacing:-.02em;color:var(--cream);background:linear-gradient(135deg,#173F31,#5F8A5A 70%,#C2A95E)}
+		.person:nth-child(2) .mono-c{background:linear-gradient(315deg,#173F31,#5F8A5A 70%,#C2A95E)}
+
+		.close{margin:clamp(70px,9vw,140px) 10px 0;border-radius:28px;padding:clamp(60px,9vw,150px) var(--pad);text-align:center}
+		.close>*{position:relative;z-index:1}
+		.close h2{font-size:clamp(2.8rem,8.6vw,9rem);line-height:.9;letter-spacing:-.05em}
+		.close h2 em{color:#F2DFA0}
+		.close p{font-size:clamp(18px,1.6vw,22px);max-width:40ch;margin:28px auto 36px;opacity:.92}
+		.foot{display:flex;justify-content:space-between;padding:26px var(--pad);font-size:15px;color:var(--muted)}
+		.foot .leaf{color:var(--green)}
+
+		@media (max-width:900px){
+			.nav nav{display:none}
+			.hero-row,.duo,.cards{grid-template-columns:1fr}
+			.cta-row{justify-content:flex-start}
+			.weeks{grid-template-columns:1fr 1fr}
+			.facts{grid-template-columns:1fr}.facts li{padding:12px 0;border-bottom:1px solid rgba(250,243,233,.18)}
+			.c{min-height:300px}
+			.bigleaf{width:90vw;right:-30vw;top:16vh}
+		}
+		@media (max-width:540px){.weeks{grid-template-columns:1fr}.wk{min-height:0}.person{flex-direction:column}}
+		@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.blobs i{animation:none}.w{opacity:1}html{scroll-behavior:auto}}
+	</style>
+
+	<script is:inline>
+		const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
+		document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 90 + 'ms'; io.observe(el); });
+
+		// Scroll lights up the problem statement word by word, and fills the month rail.
+		const st = document.getElementById('st'), words = [...st.querySelectorAll('.w')], rail = document.getElementById('railfill'), weeks = document.querySelector('.weeks');
+		const onScroll = () => {
+			const vh = innerHeight, r = st.getBoundingClientRect();
+			const p = Math.max(0, Math.min(1, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
+			words.forEach((w, i) => w.classList.toggle('on', i < Math.ceil(p * words.length)));
+			const q = weeks.getBoundingClientRect();
+			rail.style.width = Math.max(0, Math.min(1, (vh * 0.8 - q.top) / (q.height + vh * 0.2))) * 100 + '%';
+		};
+		addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll); onScroll();
+
+		const leaf = document.querySelector('.bigleaf');
+		addEventListener('pointermove', (e) => {
+			const x = e.clientX / innerWidth - 0.5, y = e.clientY / innerHeight - 0.5;
+			leaf.style.setProperty('--tx', x * -26 + 'px'); leaf.style.setProperty('--ty', y * -18 + 'px'); leaf.style.setProperty('--rx', x * 3 + 'deg');
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+---
+// Internal review page: the four landing-page variants side by side. Not linked from the site.
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const variants = [
+	{ id: 'a', name: 'Proof', tagline: 'AI you can trust in production.', lead: 'The problem. Opens on why production stalls, then the three steps.', hero: 'A chart that draws itself: the same three changes, with and without evaluation.', look: 'Cream paper, giant tight sans, mono labels. Reads like a report.', tone: 'Measured, evidential.', fit: 'Energy, utilities, industrials, construction. Buyers who answer to a board or auditor.', own: 'Step three of three. Low key.', risk: 'Quietest of the four. Less "tech company", more "advisory".' },
+	{ id: 'b', name: 'Control room', tagline: "Keep AI working once it's live.", lead: 'The system. Shows monitoring, failure modes and a switching demo.', hero: 'A live monitor: quality dips when the model changes, evals catch it, the log shows the fix.', look: 'Near-black green, phosphor accents, mono. Reads like a product.', tone: 'Technical, precise.', fit: 'Fintech, neobanks, gaming. Technical buyers who already run AI.', own: 'Interactive: flip tasks from rented to owned and watch cost fall.', risk: 'Implies a finished product. May over-promise if the tooling is early.' },
+	{ id: 'c', name: 'Embed', tagline: 'Get AI into production. Then own it.', lead: 'The people and the first month. Week-by-week plan comes early.', hero: 'Brand gradient with the leaf, and a problem statement that lights up as you scroll.', look: 'Green-to-gold gradient, rounded cards, big friendly type.', tone: 'Warm, direct.', fit: 'Either segment. Best when the buyer is hiring a team, not buying a tool.', own: 'In the tagline and as the third card.', risk: 'Week-by-week plan commits to a POC shape that is still undecided.' },
+	{ id: 'd', name: 'Rings', tagline: "Own your AI. Don't rent it.", lead: 'The thesis. Rent-versus-own table first, then the path to get there.', hero: 'Tree rings that grow: each ring a round of recorded decisions, gold where a model was swapped.', look: 'Dark forest green, light serif, gold. Reads like a manifesto.', tone: 'Confident, opinionated.', fit: 'Buyers already drawn to sovereignty or vendor independence.', own: 'The whole page.', risk: 'You asked to hold this tagline back while the first two are tested.' },
+];
+const rows = [['Tagline', 'tagline'], ['Leads with', 'lead'], ['Signature visual', 'hero'], ['Look', 'look'], ['Tone', 'tone'], ['Best fit', 'fit'], ['How ownership appears', 'own'], ['Watch out', 'risk']];
+---
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="robots" content="noindex" />
+	<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+	<title>Elm Labs — landing page variants</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+	<header class="bar">
+		<strong>Landing page variants</strong>
+		<div class="grp" id="chips">
+			{variants.map((v) => <button type="button" class="chip on" data-id={v.id} aria-pressed="true"><b>{v.id.toUpperCase()}</b>{v.name}</button>)}
+		</div>
+		<div class="grp">
+			<button type="button" class="seg on" data-w="1440">Desktop</button>
+			<button type="button" class="seg" data-w="390">Mobile</button>
+		</div>
+		<label class="sync"><input type="checkbox" id="sync" checked /> Scroll together</label>
+		<a class="jump" href="#matrix">Compare in a table ↓</a>
+	</header>
+
+	<div class="frames" id="frames">
+		{variants.map((v) => (
+			<section class="fr" data-id={v.id}>
+				<div class="fr-head">
+					<span><b>{v.id.toUpperCase()}</b> {v.name} <i>“{v.tagline}”</i></span>
+					<a href={`${base}v/${v.id}`} target="_blank" rel="noopener">Open full size ↗</a>
+				</div>
+				<div class="port"><iframe src={`${base}v/${v.id}`} title={`Variant ${v.id.toUpperCase()}: ${v.name}`} loading="eager"></iframe></div>
+			</section>
+		))}
+	</div>
+
+	<section class="matrix" id="matrix">
+		<h2>What differs</h2>
+		<p>Every variant carries the same four messages, the same team facts and the same call to action. They differ in what they say first and how they look.</p>
+		<div class="tw">
+			<table>
+				<thead><tr><th></th>{variants.map((v) => <th><b>{v.id.toUpperCase()}</b> {v.name}</th>)}</tr></thead>
+				<tbody>
+					{rows.map(([label, key]) => (
+						<tr><th>{label}</th>{variants.map((v) => <td>{v[key]}</td>)}</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+	<style is:global>
+		*{box-sizing:border-box;margin:0;padding:0}
+		body{background:#141614;color:#E9E7E1;font:14px/1.5 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+		a{color:inherit}
+		.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:10px 14px;background:#141614;border-bottom:1px solid #2B2F2B}
+		.bar strong{font-weight:600;margin-right:6px}
+		.grp{display:flex;gap:4px;background:#1E211E;border-radius:9px;padding:3px}
+		button{font:inherit;color:#9A9F98;background:none;border:0;border-radius:7px;padding:6px 11px;cursor:pointer}
+		button b{color:inherit;margin-right:6px}
+		button.on{background:#F3EBDB;color:#14261F}
+		.sync{display:flex;align-items:center;gap:7px;color:#B9BDB6;cursor:pointer}
+		.jump{margin-left:auto;color:#B9BDB6;text-decoration:none}
+		.frames{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:10px;padding:10px;height:calc(100vh - 53px)}
+		.fr{display:flex;flex-direction:column;min-width:0;border:1px solid #2B2F2B;border-radius:10px;overflow:hidden;background:#1A1C1A}
+		.fr.off{display:none}
+		.fr-head{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;white-space:nowrap;font-size:13px;border-bottom:1px solid #2B2F2B}
+		.fr-head span{overflow:hidden;text-overflow:ellipsis}
+		.fr-head b{background:#F3EBDB;color:#14261F;border-radius:5px;padding:1px 7px;margin-right:4px}
+		.fr-head i{color:#8C928A;margin-left:6px}
+		.fr-head a{color:#8FE3A0;text-decoration:none;flex:none}
+		.port{position:relative;flex:1;overflow:hidden;background:#0c0d0c}
+		.port iframe{position:absolute;top:0;left:50%;border:0;transform-origin:0 0;background:#fff}
+		.matrix{padding:56px 14px 90px;max-width:1500px;margin:0 auto}
+		.matrix h2{font-size:26px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
+		.matrix p{color:#A9AEA6;max-width:70ch;margin-bottom:26px;font-size:15px}
+		.tw{overflow-x:auto}
+		table{width:100%;min-width:900px;border-collapse:collapse;font-size:14px}
+		th,td{text-align:left;vertical-align:top;padding:13px 16px 13px 0;border-top:1px solid #2B2F2B}
+		thead th{border-top:0;font-size:15px}
+		thead b{background:#F3EBDB;color:#14261F;border-radius:5px;padding:1px 7px;margin-right:5px}
+		tbody th{width:150px;color:#8C928A;font-weight:500}
+		td{color:#D6D4CD;width:22%}
+		tbody tr:first-child td{font-weight:600;color:#fff}
+		tbody tr:last-child td{color:#E3C76A}
+	</style>
+
+	<script is:inline>
+		const frames = [...document.querySelectorAll('.fr')];
+		let vw = 1440, active = null;
+		const layout = () => frames.forEach((f) => {
+			const port = f.querySelector('.port'), fr = f.querySelector('iframe');
+			if (f.classList.contains('off')) return;
+			const s = Math.min(1, port.clientWidth / vw);
+			fr.style.width = vw + 'px'; fr.style.height = port.clientHeight / s + 'px';
+			fr.style.transform = 'scale(' + s + ')'; fr.style.marginLeft = -(vw * s) / 2 + 'px';
+		});
+		new ResizeObserver(layout).observe(document.getElementById('frames'));
+		addEventListener('resize', layout);
+
+		document.querySelectorAll('.chip').forEach((c) => c.onclick = () => {
+			const on = !c.classList.contains('on');
+			if (!on && document.querySelectorAll('.chip.on').length === 1) return;
+			c.classList.toggle('on', on); c.setAttribute('aria-pressed', on);
+			document.querySelector('.fr[data-id="' + c.dataset.id + '"]').classList.toggle('off', !on);
+			layout();
+		});
+		document.querySelectorAll('.seg').forEach((b) => b.onclick = () => {
+			document.querySelectorAll('.seg').forEach((x) => x.classList.toggle('on', x === b));
+			vw = +b.dataset.w; layout();
+		});
+
+		// Scroll together: the frame under the pointer leads, the others follow by proportion.
+		const sync = document.getElementById('sync');
+		frames.forEach((f) => {
+			const fr = f.querySelector('iframe');
+			f.addEventListener('pointerenter', () => (active = fr));
+			fr.addEventListener('load', () => {
+				const w = fr.contentWindow, d = () => w.document.documentElement;
+				w.addEventListener('scroll', () => {
+					if (!sync.checked || active !== fr) return;
+					const p = w.scrollY / Math.max(1, d().scrollHeight - w.innerHeight);
+					frames.forEach((o) => {
+						const of = o.querySelector('iframe'); if (of === fr || o.classList.contains('off')) return;
+						const ow = of.contentWindow, od = ow.document.documentElement;
+						ow.scrollTo({ top: p * (od.scrollHeight - ow.innerHeight), behavior: 'instant' });
+					});
+				}, { passive: true });
+				layout();
+			});
+		});
+	</script>
+</body>
+</html>

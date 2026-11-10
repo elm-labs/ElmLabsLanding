@@ -1,0 +1,241 @@
+---
+// Variant E — "Drift". The page quietly breaks itself as you read, then shows you what you missed.
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const mail = 'mailto:jawwad@elmlabs.ai?subject=20%20minutes';
+---
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+	<title>Elm Labs — AI you can trust in production</title>
+	<meta name="description" content="Production AI changes while nobody is looking. Elm Labs gets one critical workflow live and builds the evaluations that catch it." />
+	<meta name="theme-color" content="#F3F2EC" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body style={`--logo:url(${base}logofilledwhite.svg)`}>
+	<header class="nav">
+		<a class="brand" href="#top"><span class="leaf" id="m-leaf"></span>Elm Labs</a>
+		<span class="mono">Production AI engineering · UK</span>
+		<a class="cta" href={mail}>Book <span id="m-cta">20</span> minutes →</a>
+	</header>
+
+	<main id="top">
+		<section class="hero">
+			<h1>AI you can trust in production<span id="m-h1">.</span></h1>
+			<div class="hero-row">
+				<p class="mono">Read this page carefully.<br />It is in production.</p>
+				<p class="lede">Pilots work. Production is where AI stalls, because <span id="m-lede">nobody can prove</span> it still works as models, data and processes change. We get one critical <span id="m-flow">workflow</span> live with your team, then build the evidence that it stays good.</p>
+			</div>
+		</section>
+
+		<section class="band" id="m-band">
+			<div><b>One</b><span class="mono">workflow</span></div>
+			<div><b>About a <span id="m-month">month</span></b><span class="mono">to hard evidence</span></div>
+			<div><b>No</b><span class="mono">production commitment</span></div>
+		</section>
+
+		<section class="sec">
+			<p class="mono lab">01 / The problem</p>
+			<h2 id="m-h2">A demo proves it worked once. Production asks whether it still works today.</h2>
+			<div class="cards" id="m-cards">
+				<article><span class="mono">A</span><h3>Models change.</h3><p>Your vendor ships a new version. The same prompt now gives a different answer.</p></article>
+				<article><span class="mono">B</span><h3>Data changes.</h3><p>A new source arrives, in a new format, with an edge case nobody tested.</p></article>
+				<article><span class="mono">C</span><h3>Processes change.</h3><p>The policy moves. Yesterday's right answer is today's wrong one.</p></article>
+			</div>
+			<p class="big" id="m-big">The only people who can say what good work looks like are <span id="m-exp">your experts</span>. So we build the measure from how they decide.</p>
+		</section>
+
+		<section class="reveal" id="reveal">
+			<p class="mono">02 / Stop here</p>
+			<h2>While you were reading, <em id="count">0</em> things on this page changed.</h2>
+			<p class="rl">The status bar said <b>200 OK</b> the whole time. Nothing crashed. Nothing alerted. This is how AI fails in production: it keeps answering, a little worse than yesterday.</p>
+			<button type="button" id="run">Run the evaluation →</button>
+			<div class="report mono" id="report" hidden></div>
+			<button type="button" id="fix" hidden>Fix and restore →</button>
+		</section>
+
+		<section class="sec">
+			<p class="mono lab">03 / What we do <i class="ok">✓ checked</i></p>
+			<h2>That check is the job.</h2>
+			<ol class="steps">
+				<li><span class="mono">01</span><h3>Get it live</h3><p>Our engineers embed in your team on one critical workflow, on the models you already use.</p></li>
+				<li><span class="mono">02</span><h3>Prove it works</h3><p>Evaluations built from how your experts decide. They track quality, drift and cost every day in production.</p></li>
+				<li><span class="mono">03</span><h3>Own it, when you're ready</h3><p>The same evaluations train open-weight models you host. Switch only when they match. Switch back any time.</p></li>
+			</ol>
+		</section>
+
+		<section class="sec split">
+			<div>
+				<p class="mono lab">04 / Who it's for <i class="ok">✓ checked</i></p>
+				<h3 class="xl">Energy, utilities, industrials, construction.</h3>
+				<p>For proof and control. You have to show why the answer was right.</p>
+				<h3 class="xl">Fintech, neobanks, gaming.</h3>
+				<p>For reliability at scale, lower cost and independence from any one vendor.</p>
+			</div>
+			<div>
+				<p class="mono lab">05 / Team <i class="ok">✓ checked</i></p>
+				<h3 class="xl">Jawwad Farid</h3>
+				<p>Palantir backend tech lead, Ontology infrastructure. Founding engineer at two AI startups.</p>
+				<h3 class="xl">Burhan Ashraf</h3>
+				<p>Palantir forward-deployed tech lead. Led one of its largest UK government accounts.</p>
+				<p class="mono tm">10+ years at Palantir between them. Both Cambridge Engineering.</p>
+			</div>
+		</section>
+
+		<section class="close">
+			<h2>Book 20 minutes. No deck.</h2>
+			<a href={mail}>jawwad@elmlabs.ai →</a>
+		</section>
+	</main>
+
+	<div class="hud mono" id="hud" aria-live="polite">
+		<span><i class="led"></i><span id="h1">STATUS 200 OK</span></span>
+		<span id="h2">UPTIME 100.00%</span>
+		<span id="h3">ERRORS 0</span>
+		<span id="h4">LAST EVALUATED: NEVER</span>
+	</div>
+
+	<style is:global>
+		:root{--bg:#F3F2EC;--ink:#0B0B0B;--hot:#FF4B1F;--ok:#1F7A4D;--pad:clamp(16px,3vw,44px)}
+		*{box-sizing:border-box;margin:0;padding:0}
+		body{background:var(--bg);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;font-size:18px;line-height:1.45;-webkit-font-smoothing:antialiased;padding-bottom:40px}
+		a{color:inherit;text-decoration:none}
+		.mono{font-family:'Space Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+		.leaf{display:inline-block;width:.82em;height:1em;vertical-align:-.12em;margin-right:.4em;background:currentColor;-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat;transition:transform 1.4s}
+		h1,h2,h3,.band b,.cta,button{font-stretch:125%;font-weight:800;text-transform:uppercase}
+
+		.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px var(--pad);border-bottom:2px solid var(--ink)}
+		.brand{font-weight:800;font-stretch:125%;text-transform:uppercase;font-size:17px}
+		.cta{background:var(--ink);color:var(--bg);padding:10px 16px;font-size:13px}
+		.cta:hover{background:var(--hot)}
+
+		.hero{padding:clamp(28px,4vw,56px) var(--pad) clamp(32px,4vw,64px);border-bottom:2px solid var(--ink)}
+		h1{font-size:clamp(2.4rem,9.3vw,10rem);line-height:.86;letter-spacing:-.035em}
+		.hero-row{display:grid;grid-template-columns:1fr 1.4fr;gap:var(--pad);margin-top:clamp(28px,4vw,64px);align-items:end}
+		.lede{font-size:clamp(18px,1.7vw,25px);line-height:1.32;max-width:44ch;font-weight:500}
+
+		.band{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:2px solid var(--ink)}
+		.band div{padding:22px var(--pad) 26px;border-right:2px solid var(--ink);display:flex;flex-direction:column;gap:6px}
+		.band div:last-child{border:0}
+		.band b{font-size:clamp(1.6rem,3.6vw,3.6rem);line-height:1;letter-spacing:-.03em}
+
+		.sec{padding:clamp(48px,7vw,110px) var(--pad);border-bottom:2px solid var(--ink)}
+		.lab{margin-bottom:22px;display:flex;gap:14px;align-items:center}
+		h2{font-size:clamp(1.9rem,5.2vw,5.4rem);line-height:.92;letter-spacing:-.03em;max-width:17ch;transition:transform 2s;transform-origin:left center}
+		h3{font-size:clamp(1.1rem,1.7vw,1.6rem);line-height:1.05;letter-spacing:-.01em;margin-bottom:10px}
+		.cards{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(32px,4.5vw,64px);border:2px solid var(--ink)}
+		.cards article{padding:22px;border-right:2px solid var(--ink);min-height:230px;display:flex;flex-direction:column}
+		.cards article:last-child{border-right:0}
+		.cards h3{margin-top:auto}
+		.cards p{font-size:16px}
+		.big{font-size:clamp(1.3rem,2.6vw,2.6rem);line-height:1.12;font-weight:600;letter-spacing:-.02em;max-width:26ch;margin-top:clamp(36px,5vw,72px);transition:color 3s}
+
+		.reveal{background:var(--ink);color:var(--bg);padding:clamp(60px,9vw,150px) var(--pad)}
+		.reveal h2{max-width:15ch;margin:20px 0 28px}
+		.reveal em{font-style:normal;color:var(--hot)}
+		.rl{font-size:clamp(18px,1.7vw,24px);max-width:46ch;line-height:1.35;margin-bottom:34px}
+		button{font-family:inherit;font-size:15px;border:2px solid var(--bg);background:var(--hot);color:var(--ink);border-color:var(--hot);padding:16px 24px;cursor:pointer;transition:transform .15s}
+		button:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--bg)}
+		#fix{background:#5BE08C;border-color:#5BE08C;margin-top:26px}
+		.report{margin-top:34px;border:2px solid #333;text-transform:none;letter-spacing:0;font-size:13.5px;max-width:980px}
+		.report p{display:grid;grid-template-columns:54px 190px 1fr 1fr;gap:14px;padding:11px 16px;border-bottom:1px solid #2a2a2a;animation:in .3s}
+		.report p b{color:var(--hot)}
+		.report p span:nth-child(3){color:#8a8a84}
+		.report p.sum{display:block;color:var(--bg);border:0}
+		.report p.sum b{color:#5BE08C}
+		@keyframes in{from{opacity:0;transform:translateX(-8px)}}
+
+		.ok{font-style:normal;color:var(--ok);opacity:0;transition:opacity .6s}
+		body.fixed .ok{opacity:1}
+		.steps{list-style:none;margin-top:clamp(32px,4.5vw,64px);border-top:2px solid var(--ink)}
+		.steps li{display:grid;grid-template-columns:60px 1fr 1.2fr;gap:var(--pad);padding:26px 0;border-bottom:2px solid var(--ink);align-items:baseline}
+		.steps h3{font-size:clamp(1.5rem,3.4vw,3.2rem);letter-spacing:-.03em;margin:0}
+		.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,100px)}
+		.xl{font-size:clamp(1.4rem,2.6vw,2.4rem);letter-spacing:-.025em;margin-top:26px}
+		.split p:not(.mono){max-width:40ch}
+		.tm{margin-top:26px}
+		.close{padding:clamp(60px,9vw,150px) var(--pad);background:var(--hot)}
+		.close h2{max-width:none;font-size:clamp(2.4rem,9.3vw,10rem);line-height:.86;margin-bottom:clamp(24px,3.5vw,48px)}
+		.close a{font-family:'Space Mono',monospace;font-size:clamp(1rem,2.4vw,2rem);border-bottom:3px solid var(--ink)}
+
+		.hud{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:28px;justify-content:space-between;padding:11px var(--pad);background:var(--ink);color:#B9F5CD;white-space:nowrap;overflow:hidden}
+		.led{display:inline-block;width:8px;height:8px;border-radius:50%;background:#5BE08C;margin-right:8px;animation:blink 1.6s infinite}
+		@keyframes blink{50%{opacity:.3}}
+		.hud.bad{color:#FFB39E}.hud.bad .led{background:var(--hot)}
+
+		/* drift states */
+		.flag{background:var(--hot);color:var(--ink);box-shadow:0 0 0 4px var(--hot)}
+		.cards.flag,.band.flag{box-shadow:0 0 0 6px var(--hot);background:none;color:inherit}
+		.restored{animation:rest 1.6s}
+		@keyframes rest{0%{background:#5BE08C;box-shadow:0 0 0 4px #5BE08C}}
+
+		@media (max-width:820px){
+			.nav .mono{display:none}
+			.hero-row,.split{grid-template-columns:1fr}
+			.cards{grid-template-columns:1fr}.cards article{border-right:0;border-bottom:2px solid var(--ink);min-height:0;gap:26px}.cards article:last-child{border-bottom:0}
+			.steps li{grid-template-columns:1fr;gap:8px}
+			.report p{grid-template-columns:1fr;gap:2px}
+			.hud span:nth-child(2),.hud span:nth-child(3){display:none}
+			.band div{padding:16px}
+		}
+		@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+	</style>
+
+	<script is:inline>
+		(() => {
+			const $ = (id) => document.getElementById(id);
+			const text = (id, to, name) => { const el = $(id), from = el.textContent; return { el, name, exp: from, got: to, on: () => (el.textContent = to), off: () => (el.textContent = from) }; };
+			// Each entry changes one thing after you have scrolled past it.
+			const M = [
+				text('m-cta', '200', 'nav.cta'),
+				{ el: $('m-leaf'), name: 'nav.logo', exp: 'upright', got: 'upside down', on: () => ($('m-leaf').style.transform = 'rotate(180deg)'), off: () => ($('m-leaf').style.transform = '') },
+				text('m-h1', '?', 'hero.headline'),
+				text('m-lede', 'everybody assumes', 'hero.claim'),
+				text('m-flow', 'workflaw', 'hero.spelling'),
+				text('m-month', 'year', 'offer.duration'),
+				{ el: $('m-h2'), name: 'problem.layout', exp: 'level', got: 'tilted 1.5°', on: () => ($('m-h2').style.transform = 'rotate(-1.5deg)'), off: () => ($('m-h2').style.transform = '') },
+				{ el: $('m-cards'), name: 'problem.order', exp: 'A, B, C', got: 'C, A, B', on: () => $('m-cards').prepend($('m-cards').lastElementChild), off: () => $('m-cards').append($('m-cards').firstElementChild) },
+				text('m-exp', 'our interns', 'method.source'),
+			];
+			const hud = $('hud'), reveal = $('reveal'), count = $('count'), run = $('run'), fix = $('fix'), report = $('report');
+			let seen = false, done = false;
+			const flagAll = () => M.forEach((m) => m.hit && m.el.classList.add('flag'));
+			const tick = () => {
+				if (done || scrollY < 200) return;
+				const top = reveal.getBoundingClientRect().top;
+				M.forEach((m) => { if (!m.hit && (m.el.getBoundingClientRect().bottom < -60 || top < innerHeight * 0.9)) { m.hit = true; m.on(); } });
+				count.textContent = M.filter((m) => m.hit).length;
+				if (top < innerHeight * 0.75 && !seen) { seen = true; flagAll(); }
+			};
+			addEventListener('scroll', tick, { passive: true }); tick();
+
+			run.onclick = () => {
+				run.hidden = true; report.hidden = false; flagAll();
+				const hits = M.filter((m) => m.hit);
+				hits.forEach((m, i) => setTimeout(() => {
+					const p = document.createElement('p');
+					p.innerHTML = '<b>FAIL</b><span>' + m.name + '</span><span>expected: ' + m.exp + '</span><span>got: ' + m.got + '</span>';
+					report.append(p);
+				}, 160 * i));
+				setTimeout(() => {
+					const p = document.createElement('p'); p.className = 'sum';
+					p.innerHTML = hits.length + ' regressions found. Alerts raised by monitoring: <b>0</b>.';
+					report.append(p); fix.hidden = false;
+					hud.classList.add('bad'); $('h1').textContent = 'STATUS 200 OK'; $('h3').textContent = 'REGRESSIONS ' + hits.length; $('h4').textContent = 'LAST EVALUATED: JUST NOW';
+				}, 160 * hits.length + 200);
+			};
+			fix.onclick = () => {
+				done = true;
+				M.forEach((m) => { if (m.hit) { m.off(); m.el.classList.remove('flag'); m.el.classList.add('restored'); } });
+				fix.hidden = true; document.body.classList.add('fixed'); hud.classList.remove('bad');
+				const p = document.createElement('p'); p.className = 'sum'; p.innerHTML = '<b>All restored.</b> Scroll up and check. Then imagine this running on your workflow every day.';
+				report.append(p);
+				$('h2').textContent = 'QUALITY 100%'; $('h3').textContent = 'REGRESSIONS 0'; $('h4').textContent = 'EVALUATED: JUST NOW';
+			};
+		})();
+	</script>
+</body>
+</html>

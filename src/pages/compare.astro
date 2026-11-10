@@ -1,11 +1,13 @@
 ---
-// Internal review page: the four landing-page variants side by side. Not linked from the site.
+// Internal review page: the landing-page variants side by side. Not linked from the site.
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const variants = [
-	{ id: 'a', name: 'Proof', tagline: 'AI you can trust in production.', lead: 'The problem. Opens on why production stalls, then the three steps.', hero: 'A chart that draws itself: the same three changes, with and without evaluation.', look: 'Cream paper, giant tight sans, mono labels. Reads like a report.', tone: 'Measured, evidential.', fit: 'Energy, utilities, industrials, construction. Buyers who answer to a board or auditor.', own: 'Step three of three. Low key.', risk: 'Quietest of the four. Less "tech company", more "advisory".' },
+	{ id: 'a', name: 'Proof', tagline: 'AI you can trust in production.', lead: 'The problem. Opens on why production stalls, then the three steps.', hero: 'A chart that draws itself: the same three changes, with and without evaluation.', look: 'Cream paper, giant tight sans, mono labels. Reads like a report.', tone: 'Measured, evidential.', fit: 'Energy, utilities, industrials, construction. Buyers who answer to a board or auditor.', own: 'Step three of three. Low key.', risk: 'Quietest of the six. Less "tech company", more "advisory".' },
 	{ id: 'b', name: 'Control room', tagline: "Keep AI working once it's live.", lead: 'The system. Shows monitoring, failure modes and a switching demo.', hero: 'A live monitor: quality dips when the model changes, evals catch it, the log shows the fix.', look: 'Near-black green, phosphor accents, mono. Reads like a product.', tone: 'Technical, precise.', fit: 'Fintech, neobanks, gaming. Technical buyers who already run AI.', own: 'Interactive: flip tasks from rented to owned and watch cost fall.', risk: 'Implies a finished product. May over-promise if the tooling is early.' },
 	{ id: 'c', name: 'Embed', tagline: 'Get AI into production. Then own it.', lead: 'The people and the first month. Week-by-week plan comes early.', hero: 'Brand gradient with the leaf, and a problem statement that lights up as you scroll.', look: 'Green-to-gold gradient, rounded cards, big friendly type.', tone: 'Warm, direct.', fit: 'Either segment. Best when the buyer is hiring a team, not buying a tool.', own: 'In the tagline and as the third card.', risk: 'Week-by-week plan commits to a POC shape that is still undecided.' },
 	{ id: 'd', name: 'Rings', tagline: "Own your AI. Don't rent it.", lead: 'The thesis. Rent-versus-own table first, then the path to get there.', hero: 'Tree rings that grow: each ring a round of recorded decisions, gold where a model was swapped.', look: 'Dark forest green, light serif, gold. Reads like a manifesto.', tone: 'Confident, opinionated.', fit: 'Buyers already drawn to sovereignty or vendor independence.', own: 'The whole page.', risk: 'You asked to hold this tagline back while the first two are tested.' },
+	{ id: 'e', name: 'Drift', tagline: 'AI you can trust in production.', lead: 'A demonstration. The page changes nine things behind the reader, then asks if they noticed.', hero: 'The page itself. A status bar says 200 OK throughout. "Run the evaluation" lists every change and restores it.', look: 'Off-white, black rules, wide heavy caps, orange flags. Brutalist.', tone: 'Provocative, playful.', fit: 'Technical and digital-native buyers. People who forward links.', own: 'One line in step three.', risk: 'A reader who leaves early may see wrong copy, such as "about a year". Changes are flagged once they reach the reveal.' },
+	{ id: 'f', name: 'Line', tagline: "Keep AI working once it's live.", lead: 'A journey. One workflow travels from pilot, through three stations, to the end of the line.', hero: 'The page scrolls sideways along a production line. A token rides it and its label changes at each station.', look: 'Ochre paper, deep green ink, tall condensed caps. Industrial.', tone: 'Bold, physical.', fit: 'Energy, utilities, industrials, construction.', own: 'Station 03, drawn as a branch line you can leave and rejoin.', risk: 'Sideways scrolling surprises some people. Phones get a plain vertical version.' },
 ];
 const rows = [['Tagline', 'tagline'], ['Leads with', 'lead'], ['Signature visual', 'hero'], ['Look', 'look'], ['Tone', 'tone'], ['Best fit', 'fit'], ['How ownership appears', 'own'], ['Watch out', 'risk']];
 ---
@@ -87,12 +89,12 @@ const rows = [['Tagline', 'tagline'], ['Leads with', 'lead'], ['Signature visual
 		.matrix h2{font-size:26px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
 		.matrix p{color:#A9AEA6;max-width:70ch;margin-bottom:26px;font-size:15px}
 		.tw{overflow-x:auto}
-		table{width:100%;min-width:900px;border-collapse:collapse;font-size:14px}
+		table{width:100%;min-width:1300px;table-layout:fixed;border-collapse:collapse;font-size:14px}
 		th,td{text-align:left;vertical-align:top;padding:13px 16px 13px 0;border-top:1px solid #2B2F2B}
 		thead th{border-top:0;font-size:15px}
 		thead b{background:#F3EBDB;color:#14261F;border-radius:5px;padding:1px 7px;margin-right:5px}
 		tbody th{width:150px;color:#8C928A;font-weight:500}
-		td{color:#D6D4CD;width:22%}
+		td{color:#D6D4CD}
 		tbody tr:first-child td{font-weight:600;color:#fff}
 		tbody tr:last-child td{color:#E3C76A}
 	</style>

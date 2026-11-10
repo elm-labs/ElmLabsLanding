@@ -1,0 +1,216 @@
+---
+// Variant H — "Bands". White ground, brand green, gold and a coral accent. Three colour bands carry the offer; giant numerals carry the start.
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const mail = 'mailto:jawwad@elmlabs.ai?subject=20%20minutes';
+---
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+	<title>Elm Labs — Get AI into production. Then own it.</title>
+	<meta name="description" content="Elm Labs engineers embed in your team, take one critical workflow live, prove it works and leave you in control." />
+	<meta name="theme-color" content="#FAFAF6" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;700;900&family=Red+Hat+Mono:wght@400;500&family=Red+Hat+Text:wght@400;500&display=swap" rel="stylesheet" />
+	<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body style={`--logo:url(${base}logofilledwhite.svg)`}>
+	<header class="nav">
+		<a class="brand" href="#top"><span class="leaf"></span>Elm Labs</a>
+		<nav>
+			<a href="#bands">What we do</a>
+			<a href="#problem">Why</a>
+			<a href="#who">Who it's for</a>
+			<a href="#start">How we start</a>
+			<a href="#team">Team</a>
+		</nav>
+		<a class="btn sm" href={mail}>Book 20 minutes</a>
+	</header>
+
+	<main id="top">
+		<section class="hero">
+			<div class="bigleaf" aria-hidden="true"></div>
+			<h1 class="rv">Get AI into production. <em>Then own it.</em></h1>
+			<div class="hero-row">
+				<p class="lede rv">We're engineers who embed in your team. We take one critical workflow live on the models you already use, prove it keeps working, and leave you in control of it.</p>
+				<div class="cta-row rv">
+					<a class="btn" href={mail}>Book 20 minutes <span>→</span></a>
+					<span class="mono">No deck</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="bands" id="bands">
+			<article class="band b1">
+				<span class="mono">01</span>
+				<h2>Live</h2>
+				<div class="more"><h3>Get it live</h3><p>Our engineers embed in your team on one critical workflow, on the models you already use. Nothing changes for your users on day one.</p></div>
+			</article>
+			<article class="band b2">
+				<span class="mono">02</span>
+				<h2>Proven</h2>
+				<div class="more"><h3>Prove it works</h3><p>Evaluations built from how your experts decide. They track quality, drift and cost every day the workflow runs.</p></div>
+			</article>
+			<article class="band b3">
+				<span class="mono">03 · when you're ready</span>
+				<h2>Owned</h2>
+				<div class="more"><h3>Own it</h3><p>The same evaluations train open-weight models you host. Switch only when they match. Switch back any time.</p></div>
+			</article>
+		</section>
+
+		<section class="dark" id="problem">
+			<p class="mono lab rv">Why this is hard</p>
+			<h2 class="rv">Pilots work. Production is where AI stalls.</h2>
+			<p class="because rv">No one can prove it's still working as three things change.</p>
+			<div class="three">
+				<div class="rv"><span>1</span><h3>Models</h3><p>Your vendor ships a new version. The same prompt gives a different answer.</p></div>
+				<div class="rv"><span>2</span><h3>Data</h3><p>A new source arrives, in a new format, with an edge case nobody tested.</p></div>
+				<div class="rv"><span>3</span><h3>Processes</h3><p>The policy moves. Yesterday's right answer is today's wrong one.</p></div>
+			</div>
+		</section>
+
+		<section class="sec" id="who">
+			<p class="mono lab rv">Who it's for</p>
+			<div class="who">
+				<article class="w w1 rv">
+					<p class="mono">Proof and control</p>
+					<h3>Energy, utilities, industrials and construction.</h3>
+					<p>Your decisions carry safety, regulatory or contractual weight. You have to show why the answer was right.</p>
+				</article>
+				<article class="w w2 rv">
+					<p class="mono">Reliability at scale</p>
+					<h3>Fintech, neobanks and gaming.</h3>
+					<p>AI already runs in front of your customers. You want steady quality, a predictable bill, and no single vendor.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="sec" id="start">
+			<p class="mono lab rv">How we start</p>
+			<div class="nums">
+				<div class="rv"><b>1</b><h3>workflow</h3><p>You pick one that matters. We work on it inside your team.</p></div>
+				<div class="rv"><b>~1</b><h3>month</h3><p>Enough to get it running and measured against your experts.</p></div>
+				<div class="rv"><b>3</b><h3>numbers</h3><p>Hard evidence on quality, drift and cost.</p></div>
+				<div class="rv"><b>0</b><h3>commitment</h3><p>You owe us no production contract at the end.</p></div>
+			</div>
+		</section>
+
+		<section class="sec" id="team">
+			<p class="mono lab rv">Team</p>
+			<div class="team">
+				<h2 class="rv">Ten-plus years at Palantir between us.</h2>
+				<div>
+					<div class="p rv"><h3>Jawwad Farid</h3><p>Backend tech lead at Palantir, on Ontology infrastructure. Founding engineer at two AI startups. Cambridge Engineering.</p></div>
+					<div class="p rv"><h3>Burhan Ashraf</h3><p>Forward-deployed tech lead at Palantir. Led one of its largest UK government accounts. Cambridge Engineering.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="close">
+			<h2 class="rv">Book 20 minutes. <em>No deck.</em></h2>
+			<a class="btn big rv" href={mail}>jawwad@elmlabs.ai <span>→</span></a>
+		</section>
+	</main>
+	<footer class="foot mono"><span><span class="leaf"></span>Elm Labs · UK</span><a href="https://www.linkedin.com/company/elm-labs-ai" target="_blank" rel="noopener noreferrer">LinkedIn</a><span>© 2026</span></footer>
+
+	<style is:global>
+		:root{--sage:#2E7A5E;--olive:#E8C55C;--cream:#FAFAF6;--brick:#ED6A5A;--ink:#DB4D38;--night:#123528;--soft:#4C6157;--pad:clamp(18px,4vw,64px)}
+		*{box-sizing:border-box;margin:0;padding:0}
+		html{scroll-behavior:smooth}
+		body{background:var(--cream);color:var(--night);font-family:'Red Hat Text',system-ui,sans-serif;font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased}
+		a{color:inherit;text-decoration:none}
+		h1,h2,h3,.brand,.btn,.nums b{font-family:'Red Hat Display',system-ui,sans-serif;font-weight:900}
+		em{font-style:normal;color:var(--ink)}
+		.mono{font-family:'Red Hat Mono',ui-monospace,monospace;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase}
+		.leaf{display:inline-block;width:.82em;height:1em;vertical-align:-.12em;margin-right:.4em;background:currentColor;-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat}
+		.rv{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+		.rv.in{opacity:1;transform:none}
+
+		.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px var(--pad);background:rgba(250,250,246,.88);backdrop-filter:blur(10px)}
+		.brand{font-size:20px;letter-spacing:-.02em}
+		.nav nav{display:flex;gap:28px;font-size:15px;font-weight:500}
+		.nav nav a:hover{color:var(--ink)}
+		.btn{display:inline-flex;align-items:center;gap:10px;background:var(--night);color:var(--cream);padding:17px 28px;border-radius:999px;font-size:17px;transition:transform .2s,background .2s}
+		.btn:hover{transform:translateY(-2px);background:var(--brick);color:var(--night)}
+		.btn span{transition:transform .2s}.btn:hover span{transform:translateX(4px)}
+		.btn.sm{padding:10px 18px;font-size:14.5px}
+
+		.hero{position:relative;overflow:hidden;padding:clamp(36px,5.5vw,84px) var(--pad) clamp(36px,4.5vw,64px)}
+		.bigleaf{position:absolute;right:-5vw;top:-9vw;width:min(40vw,560px);aspect-ratio:58/71;background:var(--brick);-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat;transform:rotate(14deg)}
+		h1{position:relative;font-size:clamp(3rem,10.2vw,10.6rem);line-height:.88;letter-spacing:-.055em;max-width:10.5ch}
+		h1 em{display:block}
+		.hero-row{position:relative;display:grid;grid-template-columns:1.2fr 1fr;gap:var(--pad);align-items:end;margin-top:clamp(26px,3.5vw,52px)}
+		.lede{font-size:clamp(18px,1.6vw,23px);line-height:1.4;max-width:46ch;font-weight:500}
+		.cta-row{display:flex;align-items:center;gap:20px;justify-content:flex-end}
+
+		.bands{display:flex;flex-direction:column;margin:0 10px;border-radius:28px;overflow:hidden;height:clamp(560px,82vh,760px)}
+		.band{flex:1 1 0;min-height:0;display:grid;grid-template-columns:minmax(120px,1fr) 3fr 3fr;gap:var(--pad);align-items:center;padding:0 calc(var(--pad) - 10px);overflow:hidden;transition:flex-grow .55s cubic-bezier(.3,.7,.2,1)}
+		.band h2{font-size:clamp(3rem,9.5vw,9.6rem);line-height:.85;letter-spacing:-.055em;text-transform:uppercase}
+		.band .more{opacity:.0;transform:translateX(24px);transition:opacity .45s,transform .45s}
+		.band .more h3{font-size:clamp(1.3rem,2vw,1.9rem);letter-spacing:-.03em;margin-bottom:8px}
+		.band .more p{max-width:40ch}
+		.b1{background:var(--sage);color:var(--cream)}
+		.b2{background:var(--olive)}
+		.b3{background:var(--brick)}
+		.bands:not(:hover) .b1,.band:hover{flex-grow:2.3}
+		.bands:not(:hover) .b1 .more,.band:hover .more{opacity:1;transform:none}
+
+		.dark{margin:10px 10px 0;border-radius:28px;background:var(--night);color:var(--cream);padding:clamp(48px,7.5vw,120px) calc(var(--pad) - 10px)}
+		.lab{margin-bottom:22px;color:var(--ink)}
+		.dark .lab{color:var(--olive)}
+		.dark h2,.team h2{font-size:clamp(2.3rem,6vw,6.2rem);line-height:.92;letter-spacing:-.05em;max-width:14ch}
+		.because{font-size:clamp(18px,1.9vw,26px);font-weight:500;margin:22px 0 clamp(36px,5vw,72px);color:rgba(250,250,246,.78)}
+		.three{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,48px)}
+		.three span{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--brick);color:var(--night);font:900 19px 'Red Hat Display',sans-serif;margin-bottom:18px}
+		.three p{color:rgba(250,250,246,.74)}
+		h3{font-size:clamp(1.4rem,2.1vw,2rem);letter-spacing:-.035em;line-height:1.05;margin-bottom:8px}
+
+		.sec{padding:clamp(60px,8.5vw,130px) var(--pad) 0}
+		.who{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+		.w{border-radius:26px;padding:clamp(24px,2.8vw,42px);min-height:360px;display:flex;flex-direction:column}
+		.w h3{font-size:clamp(1.8rem,3.3vw,3.2rem);letter-spacing:-.05em;line-height:.96;margin:auto 0 16px;padding-top:56px}
+		.w p:not(.mono){max-width:40ch}
+		.w1{background:var(--night);color:var(--cream)}
+		.w1 .mono{color:var(--olive)}
+		.w2{background:var(--olive)}
+
+		.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.5vw,40px)}
+		.nums>div{border-top:4px solid var(--night);padding-top:10px}
+		.nums b{display:block;font-size:clamp(5rem,13vw,13.5rem);line-height:.9;letter-spacing:-.07em;color:var(--brick)}
+		.nums h3{text-transform:lowercase}
+		.nums p,.p p{color:var(--soft)}
+
+		.team{display:grid;grid-template-columns:1fr 1.1fr;gap:var(--pad)}
+		.p{padding:22px 0;border-top:4px solid var(--night)}
+		.p p{max-width:46ch}
+
+		.close{margin:clamp(60px,8.5vw,130px) 10px 0;border-radius:28px;background:var(--night);color:var(--cream);padding:clamp(56px,9vw,150px) calc(var(--pad) - 10px)}
+		.close h2{font-size:clamp(3rem,10.2vw,10.6rem);line-height:.88;letter-spacing:-.055em;margin-bottom:clamp(28px,4vw,56px)}
+		.close em{color:var(--brick);display:block}
+		.btn.big{background:var(--brick);color:var(--night);font-size:clamp(1.05rem,2vw,1.6rem);padding:22px 34px}
+		.btn.big:hover{background:var(--cream);color:var(--night)}
+		.foot{display:flex;justify-content:space-between;padding:26px var(--pad)}
+
+		@media (max-width:900px){
+			.nav nav{display:none}
+			.hero-row,.three,.who,.team{grid-template-columns:1fr}
+			.cta-row{justify-content:flex-start}
+			.bigleaf{width:62vw;right:-22vw;top:-10vw;opacity:.9}
+			.bands{height:auto}
+			.band{grid-template-columns:1fr;gap:10px;padding:28px calc(var(--pad) - 10px) 32px;flex:none}
+			.band .more{opacity:1!important;transform:none!important}
+			.band h2{font-size:19vw}
+			.nums{grid-template-columns:1fr 1fr}
+			.w{min-height:280px}
+		}
+		@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.band,.band .more{transition:none}html{scroll-behavior:auto}}
+	</style>
+
+	<script is:inline>
+		const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
+		document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 80 + 'ms'; io.observe(el); });
+	</script>
+</body>
+</html>

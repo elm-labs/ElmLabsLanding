@@ -1,9 +1,12 @@
 ---
-// Variant J — "Evidence". A's paper-and-ink look with the coral accent. The hero shows an invoice
-// workflow, then the same workflow paying a credit note as if it were a bill. The page is about getting one workflow into production;
-// lower down, a chart of the same workflow over 100 days with and without an evaluation, then a section on owning the intelligence.
+import Water from '../../components/Water.astro';
+import BgToggle from '../../components/BgToggle.astro';
+import Glass from '../../components/Glass.astro';
+// Variant J — "Evidence". A's paper-and-ink look with the coral accent. The hero is text only.
+// The page is about getting one workflow into production;
+// lower down, a chart of one workflow over 100 days with and without an evaluation, then a section on owning the intelligence.
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-const mail = 'mailto:jawwad@elmlabs.ai?subject=20%20minutes';
+const mail = 'mailto:founders@elmlabs.ai?subject=20%20minutes';
 // TODO: replace with each founder's personal LinkedIn URL.
 const linkedin = { jawwad: 'https://www.linkedin.com/company/elm-labs-ai', burhan: 'https://www.linkedin.com/company/elm-labs-ai' };
 const focus = [
@@ -30,10 +33,13 @@ const focus = [
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-	<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+	<noscript><style>.rv{opacity:1!important;transform:none!important}.nav.top{background:color-mix(in srgb,var(--paper) 88%,transparent);border-bottom-color:var(--rule)}.nav.top .brand,.nav.top .btn{opacity:1;visibility:visible}</style></noscript>
 </head>
 <body style={`--logo:url(${base}logofilledwhite.svg)`}>
-	<header class="nav">
+	<Water />
+	<Glass />
+	<BgToggle effects={[{ id: 'water', label: 'Water' }, { id: 'glass', label: 'Glass' }, { id: 'off', label: 'Off' }]} fallback="glass" />
+	<header class="nav top">
 		<a class="brand" href="#top"><span class="leaf"></span>Elm Labs</a>
 		<nav>
 			<a href="#live">How we work</a>
@@ -46,53 +52,15 @@ const focus = [
 
 	<main id="top">
 		<section class="hero">
-			<h1 class="rv">AI you can trust in <em>production.</em></h1>
+			<p class="lockup" id="lockup"><span class="leaf"></span>Elm Labs</p>
+			<p class="cred">Founded by two former Palantir tech leads, with 11&nbsp;years there between them.</p>
+			<h1>AI you can trust in production.</h1>
 			<div class="hero-row">
-				<div class="lede rv">
-					<p>A demo proves it worked once. Production asks whether it still works <em>today.</em></p>
-					<p class="soft">We take one critical workflow live with your team, and keep it working as your data and processes change.</p>
+				<div class="lede">
+					<p>We build one AI workflow with your team and have it in production within&nbsp;weeks.</p>
+					<p class="soft">It learns from your experts' corrections, so it stays accurate as your data and models change.</p>
 					<div class="cta">
 						<a class="btn" href={mail}>Book 20 minutes <span>→</span></a>
-						<span class="note">A conversation, not a pitch.</span>
-					</div>
-				</div>
-				<div class="demo rv" id="demo" data-step="0" aria-label="Illustrative example: a credit note from a supplier is paid as if it were an invoice">
-					<div class="tabs" role="tablist">
-						<button type="button" role="tab" data-s="0" class="on">Monday: an invoice</button>
-						<button type="button" role="tab" data-s="1">Thursday: a credit note</button>
-						<button type="button" role="tab" data-s="2">With an evaluation</button>
-					</div>
-					<div class="desk">
-						<div class="paper">
-							<div class="ph"><div><b>Northgate Supply Ltd</b><span>Unit 4, Calder Way, Leeds</span></div><div class="r"><b data-show="0">INVOICE</b><b class="cn" data-show="1 2">CREDIT NOTE<em data-show="2">Never read</em></b><span data-show="0">NS-10482 · 14 Oct 2026</span><span data-show="1 2">CN-0193 · 22 Oct 2026</span></div></div>
-							<table data-show="0">
-								<tr><th>Description</th><th>Qty</th><th>Amount</th></tr>
-								<tr><td>Valve actuator, type VA-3</td><td>12</td><td>25,800.00</td></tr>
-								<tr><td>Installation, on site</td><td>3 days</td><td>9,600.00</td></tr>
-								<tr><td>Freight and handling</td><td></td><td>4,808.33</td></tr>
-							</table>
-							<table data-show="1 2">
-								<tr><th>Description</th><th>Qty</th><th>Amount</th></tr>
-								<tr><td>Returned: valve actuator, type VA-3</td><td>4</td><td>8,600.00</td></tr>
-								<tr><td>Credit against invoice NS-10482</td><td></td><td></td></tr>
-								<tr><td>&nbsp;</td><td></td><td></td></tr>
-							</table>
-							<div class="tot">
-								<p><span>Subtotal</span><span data-show="0">£40,208.33</span><span data-show="1 2">£8,600.00</span></p>
-								<p><span>VAT at 20%</span><span data-show="0">£8,041.67</span><span data-show="1 2">£1,720.00</span></p>
-								<p class="due-l"><span data-show="0">Total due</span><span data-show="1 2">Total credit</span><span data-show="0">£48,250.00</span><span data-show="1 2">£10,320.00</span><em>Read as the amount</em></p>
-							</div>
-						</div>
-						<div class="pay">
-							<p class="ok"><i></i>Completed · no errors</p>
-							<p class="to">Payment to Northgate Supply Ltd</p>
-							<p class="amt" data-show="0">£48,250.00</p>
-							<p class="amt" data-show="1">£10,320.00</p>
-							<p class="amt struck" data-show="2">£10,320.00</p>
-							<p class="say" data-show="0">Queued for Friday's run.</p>
-							<p class="say" data-show="1">Queued for Friday's run. A refund is about to be paid as a bill.</p>
-							<p class="say flag" data-show="2">Held before payment. This is a credit note: Northgate owes you £10,320.00.</p>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -112,16 +80,16 @@ const focus = [
 
 		<section class="sec" id="monitor">
 			<div class="split">
-				<h2 class="rv">Works on day one. Still works on <em>day 100.</em></h2>
-				<p class="sub rv">Formats change, processes evolve, and cases turn up that only an experienced operator would recognise. We catch the silent failures before they add up to a workflow nobody trusts.</p>
+				<h2 class="rv">We keep checking its work against your experts.</h2>
+				<p class="sub rv">Formats change, processes evolve, and cases turn up that only an experienced operator would recognise. So we build tests from your experts' decisions alongside the workflow. When one of these changes breaks something, a test catches it and the workflow corrects itself.</p>
 			</div>
 			<div class="mon rv" id="mon" aria-label="Illustrative chart: the share of decisions that match your experts over 100 days, with and without an evaluation">
 				<div class="mon-head"><span>Decisions that match your experts</span><span class="key"><i></i>With an evaluation<i class="k2"></i>Without</span></div>
 				<canvas id="chart"></canvas>
 				<ol class="events">
-					<li data-d="23"><span>Day 23</span><b>A supplier changes its invoice template</b><p>Caught on the first invoice and fixed the same day.</p></li>
-					<li data-d="58"><span>Day 58</span><b>A case nobody wrote down</b><p>Sent to one of your experts. Their answer becomes a new test.</p></li>
-					<li data-d="81"><span>Day 81</span><b>The approval process changes</b><p>Flagged as the old rule starts to fail, and updated.</p></li>
+					<li data-d="23"><span>Day 23</span><b>A supplier changes its invoice template</b><p>Caught on the first invoice. The workflow adjusts to the new layout the same day.</p></li>
+					<li data-d="58"><span>Day 58</span><b>A case nobody wrote down</b><p>The workflow sends it to one of your experts. Their answer becomes a new test.</p></li>
+					<li data-d="81"><span>Day 81</span><b>The approval process changes</b><p>Tests on the old rule start to fail, and the workflow switches to the new one.</p></li>
 				</ol>
 			</div>
 		</section>
@@ -157,12 +125,12 @@ const focus = [
 			<div class="team">
 				<div class="rv">
 					<h3>Jawwad Farid</h3>
-					<p>Co-founder. Five years at Palantir as a backend tech lead on its Ontology infrastructure, and founding engineer at two AI startups.</p>
+					<p>Palantir Developer Tech Lead, worked on the Ontology infrastructure. 2x AI startup Founding Engineer</p>
 					<a href={linkedin.jawwad} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
 				</div>
 				<div class="rv">
 					<h3>Burhan Ashraf</h3>
-					<p>Co-founder. Six years at Palantir as a forward-deployed tech lead, leading one of its largest UK government accounts.</p>
+					<p>Six years at Palantir as a forward-deployed tech lead, leading one of its largest UK government accounts.</p>
 					<a href={linkedin.burhan} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
 				</div>
 			</div>
@@ -172,7 +140,7 @@ const focus = [
 			<h2 class="rv">Book <em>20 minutes.</em></h2>
 			<div class="rv">
 				<p>Tell us about one workflow you wish you could trust. We'll tell you how we would get it there.</p>
-				<a class="mail" href={mail}>jawwad@elmlabs.ai <span>→</span></a>
+				<a class="mail" href={mail}>founders@elmlabs.ai <span>→</span></a>
 			</div>
 		</section>
 	</main>
@@ -185,13 +153,17 @@ const focus = [
 		body{background:var(--paper);color:var(--ink);font-family:'Inter Tight',system-ui,sans-serif;font-size:17.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
 		a{color:inherit;text-decoration:none}
 		.leaf{display:inline-block;width:.82em;height:1em;vertical-align:-.12em;margin-right:.4em;background:currentColor;-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat}
-		h1 em,h2 em,.lede em{font-style:normal;color:var(--mid)}
+		h2 em,.lede em{font-style:normal;color:var(--mid)}
 		.close h2 em{color:#D8C377}
 		.rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
 		.rv.in{opacity:1;transform:none}
 
-		.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px var(--edge);background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
-		.brand{font-weight:600;font-size:18px;letter-spacing:-.02em;color:var(--green)}
+		.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px var(--edge);background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);transition:background .3s,border-color .3s}
+		.brand{font-weight:600;font-size:21px;letter-spacing:-.02em;color:var(--green);transition:opacity .3s,visibility .3s}
+		/* At the top of the page the hero lockup is the logo: the nav drops its own logo, line and background. */
+		.nav.top{background:transparent;backdrop-filter:none;border-bottom-color:transparent}
+		.nav .btn{transition:background .2s,opacity .3s,visibility .3s}
+		.nav.top .brand,.nav.top .btn{opacity:0;visibility:hidden}
 		.nav nav{display:flex;gap:28px;font-size:15px;color:var(--muted)}
 		.nav nav a:hover{color:var(--ink)}
 		.btn{display:inline-flex;align-items:center;gap:10px;background:var(--coral);color:#1B1210;padding:15px 22px;border-radius:3px;font-weight:600;font-size:16.5px;transition:background .2s}
@@ -199,49 +171,18 @@ const focus = [
 		.btn span{transition:transform .2s}.btn:hover span{transform:translateX(4px)}
 		.btn.sm{padding:9px 15px;font-size:14.5px}
 
-		.hero{padding:clamp(36px,5.5vw,84px) var(--edge) 0}
-		h1{font-size:clamp(3.2rem,11.4vw,12rem);font-weight:600;line-height:.88;letter-spacing:-.055em;margin-left:-.05em;max-width:12ch}
-		.hero-row{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(24px,3vw,48px);align-items:start;margin-top:clamp(32px,4.5vw,64px)}
+		.hero{padding:clamp(4px,1.2vw,20px) var(--edge) 0}
+		h1{font-size:clamp(3.2rem,min(11.4vw,16.5vh),12rem);font-weight:600;line-height:.88;letter-spacing:-.055em;margin-left:-.05em;max-width:12ch}
+		/* Over the water the headline floats: a soft green shadow falls down and to the right, the same way as the leaves' shadows. */
+		.hero h1{transition:text-shadow 1.2s ease}
+		[data-bg="water"] .hero h1{text-shadow:.065em .09em .09em rgba(31,77,58,.15)}
+		.hero-row{margin-top:clamp(24px,3vw,44px)}
 		.lede p{font-size:clamp(20px,1.9vw,27px);line-height:1.25;letter-spacing:-.02em;max-width:26ch;font-weight:500}
 		.lede .soft{font-size:clamp(17px,1.35vw,20px);font-weight:400;letter-spacing:-.005em;line-height:1.45;color:var(--muted);max-width:40ch;margin-top:16px}
 		.cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:30px}
-		.note{font-size:15.5px;color:var(--muted)}
-
-		.demo{border:1px solid var(--ink);background:#E9E2D2;box-shadow:10px 10px 0 var(--green)}
-		.demo[data-step="0"] [data-show]:not([data-show~="0"]),.demo[data-step="1"] [data-show]:not([data-show~="1"]),.demo[data-step="2"] [data-show]:not([data-show~="2"]){display:none}
-		.tabs{display:grid;grid-template-columns:auto 1fr auto;border-bottom:1px solid var(--ink)}
-		.tabs button{font:inherit;font-size:15.5px;font-weight:500;color:var(--muted);background:var(--paper);border:0;border-right:1px solid var(--ink);padding:12px 16px;cursor:pointer;text-align:left;transition:background .2s,color .2s}
-		.tabs button:last-child{border-right:0}
-		.tabs button:hover{color:var(--ink)}
-		.tabs button.on{background:var(--ink);color:var(--paper)}
-		.desk{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(14px,1.6vw,24px);align-items:end;padding:clamp(16px,2vw,28px)}
-		.paper{background:#fff;padding:20px 22px 22px;font-size:14.5px;line-height:1.35;box-shadow:0 1px 0 rgba(0,0,0,.08),0 14px 30px rgba(18,36,28,.16)}
-		.ph{display:flex;justify-content:space-between;gap:12px;padding-bottom:14px;margin-bottom:12px;border-bottom:2px solid #1c1c1c}
-		.ph b{display:block;font-size:16px;letter-spacing:-.01em}
-		.ph span{font-size:12.5px;color:#666}
-		.ph .r{text-align:right}.ph .r span{display:block;margin-top:4px}.ph .r b{letter-spacing:.12em;font-size:13px}
-		.paper table{width:100%;border-collapse:collapse}
-		.paper th{font-size:11.5px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:#777;text-align:left;padding:4px 0 6px;border-bottom:1px solid #ccc}
-		.paper td{padding:7px 0;border-bottom:1px solid #e6e6e6}
-		.paper th:last-child,.paper td:last-child{text-align:right;font-variant-numeric:tabular-nums}
-		.tot{margin:14px 0 0 30%}
-		.tot p{position:relative;display:flex;justify-content:space-between;padding:6px 8px;font-variant-numeric:tabular-nums;transition:background .3s}
-		.due-l{font-weight:700}
-		.tot em{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);font-style:normal;font-size:12px;font-weight:600;white-space:nowrap;padding:3px 8px;background:var(--mid);color:#fff}
-		.tot em::after{content:'';position:absolute;left:100%;top:50%;margin-top:-5px;border:5px solid transparent;border-left-color:var(--mid);border-right:0}
-		.tot em.bad{background:var(--coral);color:#1B1210}.tot em.bad::after{border-left-color:var(--coral)}
-		.due-l{outline:2.5px solid var(--mid);background:rgba(46,122,94,.12)}
-		.cn{position:relative}
-		.cn em{position:absolute;right:-6px;bottom:calc(100% + 8px);font-style:normal;font-size:12px;font-weight:600;letter-spacing:0;white-space:nowrap;padding:3px 8px;background:var(--coral);color:#1B1210}
-		.demo[data-step="2"] .cn{outline:2.5px solid var(--coral);outline-offset:2px;background:rgba(237,106,90,.24);box-shadow:0 0 0 2px rgba(237,106,90,.24)}
-		.pay{background:var(--ink);color:var(--paper);padding:18px 20px 20px}
-		.ok{font:500 12.5px 'JetBrains Mono',ui-monospace,monospace;color:#9AD9B4;margin-bottom:22px}
-		.ok i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#9AD9B4;margin-right:8px}
-		.to{font-size:14.5px;opacity:.75}
-		.amt{font-size:clamp(1.7rem,2.7vw,2.6rem);font-weight:600;letter-spacing:-.04em;line-height:1.1;font-variant-numeric:tabular-nums;margin:2px 0 10px}
-		.struck{text-decoration:line-through;text-decoration-thickness:3px;color:var(--coral)}
-		.say{font-size:15px;line-height:1.35;opacity:.85;min-height:4.1em}
-		.say.flag{opacity:1;font-weight:600;color:#FFC9BF}
+		.cred{font-size:clamp(16.5px,1.3vw,18px);font-weight:500;color:var(--ink);max-width:76ch;text-wrap:balance;margin-bottom:clamp(28px,3.2vw,48px)}
+		.lockup{font-size:clamp(2.6rem,5vw,4.75rem);font-weight:600;line-height:1;letter-spacing:-.045em;color:var(--green);margin-bottom:clamp(10px,1.2vw,16px)}
+		.lockup .leaf{margin-right:.28em}
 
 		.sec{padding:clamp(64px,8.5vw,140px) var(--edge) 0}
 		h2{font-size:clamp(2rem,4.6vw,4.6rem);font-weight:600;line-height:1;letter-spacing:-.045em;max-width:18ch;margin-bottom:clamp(30px,4vw,60px)}
@@ -309,15 +250,12 @@ const focus = [
 
 		@media (max-width:900px){
 			.nav nav{display:none}
-			.hero-row,.live,.split,.focus,.own-top,.team,.close,.desk,.events{grid-template-columns:minmax(0,1fr)}
+			.live,.split,.focus,.own-top,.team,.close,.events{grid-template-columns:minmax(0,1fr)}
 			.own-list{grid-template-columns:1fr 1fr}
 			.events li{border-right:0;border-bottom:1px solid var(--rule)}.events li:last-child{border-bottom:0}
-			.demo{box-shadow:6px 6px 0 var(--green);margin-right:6px}
-			.tabs{grid-template-columns:1fr}.tabs button{border-right:0;border-bottom:1px solid var(--rule)}
-			.say{min-height:0}
 			.team{gap:36px}
 		}
-		@media (max-width:520px){.own-list{grid-template-columns:1fr}.live li,.focus dl div{grid-template-columns:1fr;gap:4px}.tot{margin-left:0}.tot p{flex-wrap:wrap}.tot em{position:static;transform:none;order:-1;flex-basis:100%;margin:-6px -8px 6px;white-space:normal}.tot em::after{display:none}}
+		@media (max-width:520px){.own-list{grid-template-columns:1fr}.live li,.focus dl div{grid-template-columns:1fr;gap:4px}}
 		@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 	</style>
 
@@ -325,18 +263,10 @@ const focus = [
 		const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
 		document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
 
-		// Hero example: three steps. It advances by itself until the reader clicks a step.
+		// While the hero lockup is on screen the nav has no logo, line or background, so the logo never shows twice.
 		(() => {
-			const demo = document.getElementById('demo'), tabs = [...demo.querySelectorAll('.tabs button')];
-			let step = 0, timer = null, seen = false;
-			const go = (s) => { step = s; demo.dataset.step = s; tabs.forEach((t, i) => { t.classList.toggle('on', i === s); t.setAttribute('aria-selected', i === s); }); };
-			const stop = () => { clearInterval(timer); timer = null; };
-			tabs.forEach((t, i) => (t.onclick = () => { stop(); seen = true; go(i); }));
-			if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-			new IntersectionObserver((es) => {
-				if (seen) return;
-				if (es[0].isIntersecting && !timer) timer = setInterval(() => go((step + 1) % 3), 5200); else if (!es[0].isIntersecting) stop();
-			}, { threshold: 0.5 }).observe(demo);
+			const nav = document.querySelector('.nav'), lockup = document.getElementById('lockup');
+			new IntersectionObserver((es) => nav.classList.toggle('top', es[0].isIntersecting), { rootMargin: '-64px 0px 0px 0px' }).observe(lockup);
 		})();
 
 		// Day-100 chart: the share of decisions that match the experts, with and without an evaluation,

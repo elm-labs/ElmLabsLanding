@@ -1,0 +1,210 @@
+---
+// The hero background: a contour map of the land around Makkah, drawn with WebGL2 behind the hero text.
+//
+// Place it as the first child of the hero. The hero needs `position:relative; isolation:isolate` and a
+// dark background colour, which also shows if WebGL2 is missing. The canvas reaches up under the nav to the
+// top of the page.
+//
+// The map comes from public/contours/makkah.png: real elevation, cropped, smoothed and scaled to 0–1, stored
+// 16-bit with the high byte in red and the low byte in green. It was baked from the AWS terrain tiles
+// (s3.amazonaws.com/elevation-tiles-prod, terrarium format).
+//
+// Per pixel the shader:
+// 1. reads the height from the heightmap, placed so the Kaaba sits 100px right of the button (the page's
+//    .lede .btn), or where that has no room, in the gap right of the subheading, or in the space right of
+//    the button,
+// 2. colours the pixel from a deep green through olive to a soft gold, darker toward the top left where the
+//    text is, and a touch warmer higher up the terrain,
+// 3. draws a hairline at each contour level, about one device pixel wide whatever the slope, with every
+//    fifth line a little stronger, as on a survey map. The levels creep slowly downhill, and bulge a little
+//    around the cursor,
+// 4. adds a grid of small cross marks that fades in toward the right, and a fixed fine grain,
+// 5. marks the Kaaba with a faint small dark square edged in gold.
+//
+// It draws only while the hero is on screen, and once only for viewers who ask for reduced motion.
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+// The heightmap covers 20 km across and 260–870 m high: the city's valleys and the hills around them.
+// Flat ground was smoothed hard and mountains lightly, so the valleys get a few long lines and the hills keep
+// their rings.
+// MAP.n: how many contour levels span that height range, so 12 is a line about every 50 m.
+// MAP.mark: where the Kaaba sits in the heightmap, 0–1 across and down. The map is baked with the Kaaba at
+// about where the page pins it at 1440px, so the pin barely has to zoom and the whole frame shows.
+const MAP = { src: `${base}contours/makkah.png`, n: 12, mark: [0.272, 0.846] };
+---
+<canvas id="contours" data-map={JSON.stringify(MAP)} aria-hidden="true" style="position:absolute;top:0;left:0;width:100%;height:0;z-index:-1;pointer-events:none"></canvas>
+
+<script is:inline>
+addEventListener('DOMContentLoaded', () => {
+	const cv = document.getElementById('contours');
+	const hero = cv.parentElement;
+	const MAP = JSON.parse(cv.dataset.map);
+	const gl = cv.getContext('webgl2', { antialias: false, alpha: false });
+	if (!gl) { cv.style.display = 'none'; return; }
+
+	// Deep green through olive to a soft gold, as rgb hex.
+	const PAL = ['#0D2219', '#112C21', '#163829', '#1C4332', '#25503B', '#336147', '#4A7350', '#678459', '#899462', '#AAA26C', '#C5B279', '#D9C38D'];
+	const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	const FS = `#version 300 es
+	precision highp float;
+	uniform vec2 uRes; uniform float uDpr, uT, uN; uniform vec3 uM; uniform vec3 uPal[12];
+	uniform sampler2D uH; uniform vec2 uMark; uniform vec3 uPin;
+	out vec4 o;
+	vec3 ramp(float v){ v = clamp(v, 0., 1.) * 11.; float i = min(floor(v), 10.); int k = int(i); return mix(uPal[k], uPal[k + 1], v - i); }
+	float hash(vec2 p){ p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+	// One texel of the heightmap: 16 bits split across red and green. Blended by hand, because the GPU's
+	// own blending would mix the high and low bytes separately.
+	float tex(ivec2 i, ivec2 sz){ vec2 c = texelFetch(uH, clamp(i, ivec2(0), sz - 1), 0).rg; return (c.r * 255. * 256. + c.g * 255.) / 65535.; }
+	// How the heightmap sits on the canvas: a point at texture position t (0–1) lands at off + t * ts * s.
+	// Normally it covers the canvas and is kept to its right edge. When the page pins the mark (uPin.z = 1),
+	// the mark lands on the pin at (uPin.x, uPin.y), scaled up just enough that the map still covers the canvas.
+	void cover(out vec2 ts, out float s, out vec2 off){
+		ts = vec2(textureSize(uH, 0)); s = max(uRes.x / ts.x, uRes.y / ts.y);
+		if (uPin.z > 0.) {
+			vec2 lo = uPin.xy / (uMark * ts), hi = (uRes - uPin.xy) / ((1. - uMark) * ts);
+			s = max(s, max(max(lo.x, lo.y), max(hi.x, hi.y)));
+			off = uPin.xy - uMark * ts * s;
+		} else off = vec2(uRes.x - ts.x * s, (uRes.y - ts.y * s) * .5);
+	}
+	float height(vec2 p){
+		ivec2 sz = textureSize(uH, 0); vec2 ts; float s; vec2 off; cover(ts, s, off);
+		vec2 q = (p - off) / s - .5;
+		// A cubic B-spline over the 4x4 texels around the point. Straight-line blending between texels would
+		// put a small kink in a contour at every texel edge; the spline keeps the lines flowing.
+		ivec2 i = ivec2(floor(q)); vec2 f = q - floor(q);
+		vec2 f2 = f * f, f3 = f2 * f;
+		vec2 w0 = (1. - 3. * f + 3. * f2 - f3) / 6., w1 = (4. - 6. * f2 + 3. * f3) / 6., w2 = (1. + 3. * f + 3. * f2 - 3. * f3) / 6., w3 = f3 / 6.;
+		float wx[4] = float[4](w0.x, w1.x, w2.x, w3.x), wy[4] = float[4](w0.y, w1.y, w2.y, w3.y);
+		float h = 0.;
+		for (int y = 0; y < 4; y++) for (int x = 0; x < 4; x++) h += wx[x] * wy[y] * tex(i + ivec2(x - 1, y - 1), sz);
+		return h;
+	}
+	void main(){
+		vec2 p = vec2(gl_FragCoord.x, uRes.y * uDpr - gl_FragCoord.y) / uDpr;   // css px, y down
+		// Measured against at least 1100px, so a phone shows the dark left end of the slope, not all of it squeezed.
+		float u = p.x / max(uRes.x, 1100.);
+		float d = 0.02 + 0.8 * (0.72 * u + 0.28 * p.y / uRes.y);
+		float h = height(p);
+
+		vec2 q = p - uM.xy;
+		float g = h * uN - uT * 0.03 + 0.5 * uM.z * exp(-dot(q, q) / 40000.);
+		vec3 col = ramp(d * 0.95 + 0.06 * h);
+
+		float w = fwidth(g), e = abs(fract(g + .5) - .5);
+		float line = 1. - smoothstep(.5 * w, 1.5 * w, e);
+		// No lines on flat ground at the bottom of the range, where every level would crowd together.
+		line *= smoothstep(.0002, .002, h);
+		// Nor on the flattened tops of the highest ground, which would flash solid as a level passes them.
+		line *= step(1e-5, w);
+		float level = floor(g + .5);
+		col = mix(col, vec3(.965, .941, .894), line * (mod(level, 5.) == 0. ? .19 : .085));
+
+		// Cross marks every 120px, 9px across, fading in from 40% to 75% of the width.
+		vec2 c = abs(mod(p + 60., 120.) - 60.);
+		float px = 1. / uDpr;
+		float cross = max(step(c.x, .5 + px * .5) * step(c.y, 4.5), step(c.y, .5 + px * .5) * step(c.x, 4.5));
+		col = mix(col, vec3(.965, .941, .894), cross * .2 * smoothstep(.4, .75, u));
+
+		// The Kaaba: a faint small dark square with a thin gold edge, drawn only where the page pins it.
+		if (uPin.z > 0.) {
+			vec2 ts; float s; vec2 off; cover(ts, s, off);
+			vec2 k = abs(p - (off + uMark * ts * s)); float m = max(k.x, k.y), a = .7 / uDpr;
+			// Kept very faint: the edge is barely lighter than the map, the middle barely darker.
+			col = mix(col, vec3(.85, .76, .55), .05 * (1. - smoothstep(4.5 - a, 4.5 + a, m)));
+			col = mix(col, vec3(.04, .07, .05), .07 * (1. - smoothstep(3.5 - a, 3.5 + a, m)));
+		}
+
+		col += (hash(floor(p * uDpr)) - .5) * .022;
+		o = vec4(col, 1.);
+	}`;
+
+	const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+	const pr = gl.createProgram();
+	gl.attachShader(pr, sh(gl.VERTEX_SHADER, `#version 300 es
+	in vec2 a; void main(){ gl_Position = vec4(a, 0., 1.); }`));
+	gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS));
+	gl.bindAttribLocation(pr, 0, 'a'); gl.linkProgram(pr);
+	if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { cv.style.display = 'none'; return; }
+	gl.useProgram(pr);
+	gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+	gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+	const U = (k) => gl.getUniformLocation(pr, k);
+	const uRes = U('uRes'), uDpr = U('uDpr'), uT = U('uT'), uN = U('uN'), uM = U('uM'), uMark = U('uMark'), uPin = U('uPin');
+	gl.uniform3fv(U('uPal'), new Float32Array(PAL.flatMap((h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255))));
+	gl.uniform1i(U('uH'), 0);
+
+	// The heightmap texture. Its bytes must reach the shader untouched: no colour management, no premultiplying.
+	const texture = gl.createTexture();
+	gl.bindTexture(gl.TEXTURE_2D, texture);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(4));
+
+	// Sizes in css px, measured from the top of the page.
+	let W = 0, H = 0, dpr = 1, vis = true, running = false, pin = [0, 0];
+	const t0 = performance.now();
+	// The cursor. `a` is 1 while it is over the hero and eases to 0 when it leaves.
+	const M = { x: 0, y: 0, tx: 0, ty: 0, a: 0, ta: 0 };
+
+	const size = () => {
+		const r = hero.getBoundingClientRect(), top = r.top + scrollY;
+		W = document.documentElement.clientWidth; H = Math.round(r.bottom + scrollY);
+		dpr = Math.min(2, devicePixelRatio || 1);
+		cv.style.top = -top + 'px'; cv.style.height = H + 'px';
+		cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+		// The pin for the Kaaba: 100px right of the button, level with its middle. Where that has no room, the
+		// middle of the gap right of the subheading and under the headline, then the middle of the space right
+		// of the button. Where none has room, no pin, and the mark is left out.
+		const h1 = hero.querySelector('h1'), lede = hero.querySelector('.lede'), btn = hero.querySelector('.lede .btn');
+		pin = [0, 0];
+		if (h1 && lede) {
+			const a = h1.getBoundingClientRect(), c = lede.getBoundingClientRect(), b = btn?.getBoundingClientRect();
+			const textRight = Math.max(...[...lede.querySelectorAll('p')].map((e) => {
+				// The paragraph's box can be wider than its text, so measure the text itself.
+				const rg = document.createRange(); rg.selectNodeContents(e); return rg.getBoundingClientRect().right;
+			}));
+			const right = Math.min(Math.max(a.right, textRight + 200), W - 24);
+			if (b && W - 24 - (b.right + 100) >= 40) pin = [b.right + 100, (b.top + b.bottom) / 2 + scrollY];
+			else if (right - textRight >= 140) pin = [(textRight + right) / 2, (a.bottom + c.bottom) / 2 + scrollY];
+			else if (b && W - 24 - b.right >= 56) pin = [(b.right + W - 24) / 2, (b.top + b.bottom) / 2 + scrollY];
+		}
+		if (!running) frame(performance.now());
+	};
+	function frame(now) {
+		M.x += (M.tx - M.x) * 0.08; M.y += (M.ty - M.y) * 0.08; M.a += (M.ta - M.a) * 0.04;
+		gl.viewport(0, 0, cv.width, cv.height);
+		gl.uniform2f(uRes, W, H); gl.uniform1f(uDpr, dpr); gl.uniform1f(uN, MAP.n);
+		gl.uniform2fv(uMark, MAP.mark);
+		gl.uniform3f(uPin, pin[0], pin[1], pin[0] > 0 ? 1 : 0);
+		gl.uniform1f(uT, still ? 20 : (now - t0) / 1000); gl.uniform3f(uM, M.x, M.y, M.a);
+		gl.drawArrays(gl.TRIANGLES, 0, 3);
+		if (running) requestAnimationFrame(frame);
+	}
+	const sync = () => {
+		const go = !still && vis;
+		if (go && !running) { running = true; requestAnimationFrame(frame); }
+		else if (!go) running = false;
+	};
+
+	const img = new Image();
+	img.onload = () => {
+		gl.bindTexture(gl.TEXTURE_2D, texture);
+		gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
+		gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+		if (!running) frame(performance.now());
+	};
+	img.src = MAP.src;
+
+	addEventListener('pointermove', (e) => {
+		M.tx = e.clientX; M.ty = e.clientY + scrollY; M.ta = M.ty < H ? 1 : 0;
+		if (M.a === 0) { M.x = M.tx; M.y = M.ty; }
+	});
+	document.addEventListener('pointerleave', () => { M.ta = 0; });
+	addEventListener('resize', size);
+	new IntersectionObserver((es) => { vis = es[0].isIntersecting; sync(); }).observe(hero);
+	document.fonts?.ready.then(size);
+	size();
+});
+</script>

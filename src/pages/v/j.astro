@@ -1,8 +1,7 @@
 ---
-import Water from '../../components/Water.astro';
-import BgToggle from '../../components/BgToggle.astro';
-import Glass from '../../components/Glass.astro';
-// Variant J — "Evidence". A's paper-and-ink look with the coral accent. The hero is text only.
+import Contours from '../../components/Contours.astro';
+// Variant J — "Evidence". A's paper-and-ink look with the coral accent. The hero is a dark
+// green block over a slowly moving contour map (Contours.astro).
 // The page is about getting one workflow into production;
 // lower down, a chart of one workflow over 100 days with and without an evaluation, then a section on owning the intelligence.
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
@@ -29,16 +28,13 @@ const focus = [
 	<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
 	<title>Elm Labs — AI you can trust in production</title>
 	<meta name="description" content="Elm Labs engineers join your team, take one critical AI workflow into production, and keep it working as your data and processes change." />
-	<meta name="theme-color" content="#F6F0E4" />
+	<meta name="theme-color" content="#0D2219" />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 	<noscript><style>.rv{opacity:1!important;transform:none!important}.nav.top{background:color-mix(in srgb,var(--paper) 88%,transparent);border-bottom-color:var(--rule)}.nav.top .brand,.nav.top .btn{opacity:1;visibility:visible}</style></noscript>
 </head>
 <body style={`--logo:url(${base}logofilledwhite.svg)`}>
-	<Water />
-	<Glass />
-	<BgToggle effects={[{ id: 'water', label: 'Water' }, { id: 'glass', label: 'Glass' }, { id: 'off', label: 'Off' }]} fallback="glass" />
 	<header class="nav top">
 		<a class="brand" href="#top"><span class="leaf"></span>Elm Labs</a>
 		<nav>
@@ -52,6 +48,7 @@ const focus = [
 
 	<main id="top">
 		<section class="hero">
+			<Contours />
 			<p class="lockup" id="lockup"><span class="leaf"></span>Elm Labs</p>
 			<p class="cred">Founded by two former Palantir tech leads, with 11&nbsp;years there between them.</p>
 			<h1>AI you can trust in production.</h1>
@@ -171,11 +168,15 @@ const focus = [
 		.btn span{transition:transform .2s}.btn:hover span{transform:translateX(4px)}
 		.btn.sm{padding:9px 15px;font-size:14.5px}
 
-		.hero{padding:clamp(4px,1.2vw,20px) var(--edge) 0}
+		/* The hero is a dark green block with light text. The contour map (Contours.astro) is drawn inside it,
+		   behind the text, and reaches up under the nav. The gradient shows until it draws, or if WebGL2 is missing. */
+		.hero{position:relative;isolation:isolate;padding:clamp(4px,1.2vw,20px) var(--edge) clamp(64px,8vw,128px);background:linear-gradient(110deg,#112C21 30%,#678459);color:var(--paper)}
+		.hero .lockup,.hero .cred{color:var(--paper)}
+		.hero .lede .soft{color:rgba(246,240,228,.8)}
+		.hero h1{text-shadow:0 .02em .12em rgba(10,26,18,.25)}
+		.nav.top nav{color:rgba(246,240,228,.82)}
+		.nav.top nav a:hover{color:var(--paper)}
 		h1{font-size:clamp(3.2rem,min(11.4vw,16.5vh),12rem);font-weight:600;line-height:.88;letter-spacing:-.055em;margin-left:-.05em;max-width:12ch}
-		/* Over the water the headline floats: a soft green shadow falls down and to the right, the same way as the leaves' shadows. */
-		.hero h1{transition:text-shadow 1.2s ease}
-		[data-bg="water"] .hero h1{text-shadow:.065em .09em .09em rgba(31,77,58,.15)}
 		.hero-row{margin-top:clamp(24px,3vw,44px)}
 		.lede p{font-size:clamp(20px,1.9vw,27px);line-height:1.25;letter-spacing:-.02em;max-width:26ch;font-weight:500}
 		.lede .soft{font-size:clamp(17px,1.35vw,20px);font-weight:400;letter-spacing:-.005em;line-height:1.45;color:var(--muted);max-width:40ch;margin-top:16px}

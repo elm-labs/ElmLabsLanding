@@ -6,8 +6,7 @@ import Contours from '../../components/Contours.astro';
 // lower down, a chart of one workflow over 100 days with and without an evaluation, then a section on owning the intelligence.
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const mail = 'mailto:founders@elmlabs.ai?subject=20%20minutes';
-// TODO: replace with each founder's personal LinkedIn URL.
-const linkedin = { jawwad: 'https://www.linkedin.com/company/elm-labs-ai', burhan: 'https://www.linkedin.com/company/elm-labs-ai' };
+const linkedin = { jawwad: 'https://www.linkedin.com/in/jawwadfarid/', burhan: 'https://www.linkedin.com/in/burhan-ashraf-60a064107/' };
 const focus = [
 	{ need: 'Proof and control', lead: "You're not live yet", why: ", because a decision with safety, regulatory or contractual weight has to be shown to be right.", rows: [
 		['Energy and utilities', 'Triaging inspection and fault reports. Preparing regulatory returns from asset data.'],
@@ -38,9 +37,9 @@ const focus = [
 	<header class="nav top">
 		<a class="brand" href="#top"><span class="leaf"></span>Elm Labs</a>
 		<nav>
-			<a href="#live">How we work</a>
-			<a href="#monitor">Keeping it working</a>
-			<a href="#focus">Examples</a>
+			<a href="#live">Getting to production</a>
+			<a href="#monitor">Staying reliable</a>
+			<a href="#focus">Use cases</a>
 			<a href="#team">Team</a>
 		</nav>
 		<a class="btn sm" href={mail}>Book 20 minutes</a>
@@ -50,12 +49,11 @@ const focus = [
 		<section class="hero">
 			<Contours />
 			<p class="lockup" id="lockup"><span class="leaf"></span>Elm Labs</p>
-			<p class="cred">Founded by two former Palantir tech leads, with 11&nbsp;years there between them.</p>
 			<h1>AI you can trust in production.</h1>
 			<div class="hero-row">
 				<div class="lede">
-					<p>We build one AI workflow with your team and have it in production within&nbsp;weeks.</p>
-					<p class="soft">It learns from your experts' corrections, so it stays accurate as your data and models change.</p>
+					<p>We've spent more than 10 years at Palantir getting customer workflows into production within&nbsp;weeks.</p>
+					<p class="soft">AI workflows that learn from your experts' corrections, staying accurate as your data and models change.</p>
 					<div class="cta">
 						<a class="btn" href={mail}>Book 20 minutes <span>→</span></a>
 					</div>
@@ -171,18 +169,19 @@ const focus = [
 		/* The hero is a dark green block with light text. The contour map (Contours.astro) is drawn inside it,
 		   behind the text, and reaches up under the nav. The gradient shows until it draws, or if WebGL2 is missing. */
 		.hero{position:relative;isolation:isolate;padding:clamp(4px,1.2vw,20px) var(--edge) clamp(64px,8vw,128px);background:linear-gradient(110deg,#112C21 30%,#678459);color:var(--paper)}
-		.hero .lockup,.hero .cred{color:var(--paper)}
+		.hero .lockup{color:var(--paper)}
 		.hero .lede .soft{color:rgba(246,240,228,.8)}
 		.hero h1{text-shadow:0 .02em .12em rgba(10,26,18,.25)}
 		.nav.top nav{color:rgba(246,240,228,.82)}
 		.nav.top nav a:hover{color:var(--paper)}
 		h1{font-size:clamp(3.2rem,min(11.4vw,16.5vh),12rem);font-weight:600;line-height:.88;letter-spacing:-.055em;margin-left:-.05em;max-width:12ch}
 		.hero-row{margin-top:clamp(24px,3vw,44px)}
-		.lede p{font-size:clamp(20px,1.9vw,27px);line-height:1.25;letter-spacing:-.02em;max-width:26ch;font-weight:500}
+		.lede p{font-size:clamp(20px,1.9vw,27px);line-height:1.25;letter-spacing:-.02em;max-width:30ch;font-weight:500}
+		/* Wide enough that the first paragraph sits on two lines on desktop. */
+		.lede p:first-child{max-width:37ch}
 		.lede .soft{font-size:clamp(17px,1.35vw,20px);font-weight:400;letter-spacing:-.005em;line-height:1.45;color:var(--muted);max-width:40ch;margin-top:16px}
 		.cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:30px}
-		.cred{font-size:clamp(16.5px,1.3vw,18px);font-weight:500;color:var(--ink);max-width:76ch;text-wrap:balance;margin-bottom:clamp(28px,3.2vw,48px)}
-		.lockup{font-size:clamp(2.6rem,5vw,4.75rem);font-weight:600;line-height:1;letter-spacing:-.045em;color:var(--green);margin-bottom:clamp(10px,1.2vw,16px)}
+		.lockup{font-size:clamp(2.6rem,5vw,4.75rem);font-weight:600;line-height:1;letter-spacing:-.045em;color:var(--green);margin-bottom:clamp(36px,4.2vw,64px)}
 		.lockup .leaf{margin-right:.28em}
 
 		.sec{padding:clamp(64px,8.5vw,140px) var(--edge) 0}
